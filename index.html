@@ -5,13 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema Hospitalario - Citas</title>
-
 
     <style>
 
@@ -20,634 +16,327 @@
             font-family: Arial, sans-serif;
         }
 
-
-        html,
         body {
             margin: 0;
-            padding: 0;
-            min-height: 100%;
-        }
-
-
-        body {
-
             background: #eef4f7;
-
             color: #263238;
-
         }
-
-
-        /* =========================================
-           CONTENEDOR PRINCIPAL - TODA LA PANTALLA
-        ========================================= */
 
         .container {
-
             width: 100%;
-
             min-height: 100vh;
-
-            margin: 0;
-
             background: white;
-
             padding: 35px 5%;
-
         }
-
 
         .encabezado {
-
             text-align: center;
-
             margin-bottom: 35px;
-
         }
-
 
         .encabezado h1 {
-
             color: #00695c;
-
-            margin-bottom: 5px;
-
+            margin-bottom: 8px;
             font-size: 32px;
-
         }
-
 
         .encabezado p {
-
             color: #607d8b;
-
             font-size: 16px;
-
         }
-
-
-        /* =========================================
-           FORMULARIO
-        ========================================= */
-
-        #formCita {
-
-            width: 100%;
-
-        }
-
 
         fieldset {
-
             border: 1px solid #cfd8dc;
-
             border-radius: 10px;
-
             padding: 25px;
-
             margin-bottom: 25px;
-
-            background: #ffffff;
-
         }
-
 
         legend {
-
             font-weight: bold;
-
             color: #00695c;
-
             padding: 0 10px;
-
-            font-size: 18px;
-
+            font-size: 17px;
         }
-
 
         .grid {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-
         }
-
 
         .campo {
-
             display: flex;
-
             flex-direction: column;
-
         }
-
 
         .campo-completo {
-
             grid-column: 1 / -1;
-
         }
-
 
         label {
-
             font-weight: bold;
-
             margin-bottom: 7px;
-
         }
-
 
         input,
         select,
         textarea {
-
             width: 100%;
-
             padding: 13px;
-
             border: 1px solid #b0bec5;
-
             border-radius: 7px;
-
             font-size: 15px;
-
-            background: white;
-
         }
-
 
         input:focus,
         select:focus,
         textarea:focus {
-
             outline: none;
-
             border-color: #00897b;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(0,137,123,.12);
-
+            box-shadow: 0 0 0 3px rgba(0,137,123,.12);
         }
-
 
         textarea {
-
             min-height: 100px;
-
             resize: vertical;
-
         }
-
 
         .opciones {
-
             display: flex;
-
             flex-wrap: wrap;
-
-            gap: 20px;
-
+            gap: 18px;
             margin-top: 8px;
-
         }
-
 
         .opciones label {
-
             font-weight: normal;
-
         }
-
 
         .urgencia {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-
         }
-
 
         .urgencia label {
-
-            padding: 18px;
-
+            padding: 20px;
             border-radius: 8px;
-
             text-align: center;
-
             cursor: pointer;
-
             border: 1px solid #cfd8dc;
-
-            transition: .2s;
-
         }
-
-
-        .urgencia label:hover {
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 4px 10px
-                rgba(0,0,0,.08);
-
-        }
-
 
         .no-urgente {
-
             background: #e8f5e9;
-
         }
-
 
         .prioritaria {
-
             background: #fff8e1;
-
         }
-
 
         .urgente {
-
             background: #fff3e0;
-
         }
-
 
         .emergencia {
-
             background: #ffebee;
-
             color: #b71c1c;
-
         }
-
 
         .embarazo {
-
             display: none;
-
             background: #fce4ec;
-
             padding: 20px;
-
-            margin-top: 18px;
-
+            margin-top: 20px;
             border-radius: 8px;
-
         }
-
 
         .alerta {
-
             display: none;
-
             padding: 15px;
-
             margin-top: 15px;
-
             border-radius: 7px;
-
         }
-
 
         .error {
-
             background: #ffebee;
-
             color: #c62828;
-
             border: 1px solid #ef9a9a;
-
         }
-
 
         .info {
-
             background: #e3f2fd;
-
             color: #1565c0;
-
             border: 1px solid #90caf9;
-
         }
-
 
         .exito {
-
             display: none;
-
             margin-top: 25px;
-
             padding: 30px;
-
             border-radius: 10px;
-
             background: #e8f5e9;
-
             border: 1px solid #81c784;
-
             text-align: center;
-
         }
-
 
         .exito h2 {
-
             color: #2e7d32;
-
         }
-
 
         .folio {
-
             font-size: 28px;
-
             font-weight: bold;
-
             color: #00695c;
-
             letter-spacing: 2px;
-
             margin: 15px 0;
-
         }
-
 
         .datos-cita {
-
             text-align: left;
-
             max-width: 600px;
-
             margin: 20px auto;
-
             background: white;
-
             padding: 20px;
-
             border-radius: 8px;
-
         }
-
 
         .datos-cita p {
-
             margin: 10px 0;
-
         }
-
 
         button {
-
             width: 100%;
-
             padding: 15px;
-
             border: none;
-
             border-radius: 7px;
-
             background: #00796b;
-
             color: white;
-
             font-size: 17px;
-
             font-weight: bold;
-
             cursor: pointer;
-
-            transition: .2s;
-
         }
-
 
         button:hover {
-
             background: #004d40;
-
         }
-
 
         .boton-nueva {
-
             background: #1565c0;
-
             margin-top: 15px;
-
         }
-
 
         .boton-nueva:hover {
-
             background: #0d47a1;
-
         }
-
-
-        .boton-cancelar {
-
-            background: #d32f2f;
-
-            padding: 10px 15px;
-
-            width: auto;
-
-            font-size: 14px;
-
-        }
-
-
-        .boton-cancelar:hover {
-
-            background: #b71c1c;
-
-        }
-
 
         .obligatorio {
-
             color: #d32f2f;
-
         }
-
 
         .horario-info {
-
             margin-top: 8px;
-
             padding: 10px;
-
             background: #e3f2fd;
-
             color: #1565c0;
-
             border-radius: 6px;
-
             font-size: 13px;
-
         }
 
+        /* =====================================
+           LISTA DE CITAS
+        ===================================== */
 
-        /* =========================================
-           CITAS REGISTRADAS
-        ========================================= */
-
-        .seccion-citas {
-
+        #seccionCitas {
             margin-top: 40px;
-
-            padding-top: 30px;
-
-            border-top: 2px solid #e0e0e0;
-
         }
 
-
-        .seccion-citas h2 {
-
+        .titulo-citas {
             color: #00695c;
-
-            margin-bottom: 20px;
-
+            margin-bottom: 15px;
         }
-
 
         .lista-citas {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-
         }
-
 
         .cita-card {
-
             border: 1px solid #cfd8dc;
-
+            border-left: 6px solid #00796b;
             border-radius: 10px;
-
             padding: 20px;
-
-            background: #f8fafb;
-
-            box-shadow:
-                0 3px 10px
-                rgba(0,0,0,.06);
-
+            background: #fafafa;
         }
-
 
         .cita-card h3 {
-
-            color: #00695c;
-
             margin-top: 0;
-
+            color: #00695c;
         }
-
 
         .cita-card p {
-
             margin: 8px 0;
-
-            font-size: 14px;
-
         }
 
-
-        .cita-card .folio-card {
-
-            color: #1565c0;
-
-            font-weight: bold;
-
+        .boton-cancelar {
+            margin-top: 15px;
+            background: #d32f2f;
+            font-size: 15px;
+            padding: 11px;
         }
 
+        .boton-cancelar:hover {
+            background: #b71c1c;
+        }
 
         .sin-citas {
-
-            padding: 25px;
-
-            text-align: center;
-
             background: #f5f5f5;
-
+            padding: 25px;
+            text-align: center;
+            color: #607d8b;
             border-radius: 8px;
-
-            color: #78909c;
-
         }
 
-
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
-
-        @media(max-width:900px) {
-
-            .lista-citas {
-
-                grid-template-columns: 1fr 1fr;
-
-            }
-
+        .estado {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 13px;
         }
 
-
-        @media(max-width:700px) {
-
-            .container {
-
-                padding: 20px 15px;
-
-            }
-
+        @media(max-width: 800px) {
 
             .grid {
-
                 grid-template-columns: 1fr;
-
             }
-
 
             .urgencia {
-
-                grid-template-columns: 1fr;
-
+                grid-template-columns: 1fr 1fr;
             }
-
 
             .lista-citas {
-
                 grid-template-columns: 1fr;
-
             }
 
+            .container {
+                padding: 25px 15px;
+            }
+        }
+
+        @media(max-width: 500px) {
+
+            .urgencia {
+                grid-template-columns: 1fr;
+            }
 
             .encabezado h1 {
-
                 font-size: 25px;
-
             }
-
         }
 
     </style>
@@ -661,9 +350,9 @@
 <div class="container">
 
 
-    <!-- =========================================
+    <!-- =====================================
          ENCABEZADO
-    ========================================== -->
+    ====================================== -->
 
     <div class="encabezado">
 
@@ -678,16 +367,14 @@
     </div>
 
 
-    <!-- =========================================
+    <!-- =====================================
          FORMULARIO
-    ========================================== -->
+    ====================================== -->
 
     <form id="formCita">
 
 
-        <!-- =====================================
-             1. DATOS DEL PACIENTE
-        ====================================== -->
+        <!-- PACIENTE -->
 
         <fieldset>
 
@@ -704,7 +391,6 @@
                     <label for="nombre">
 
                         Nombre completo
-
                         <span class="obligatorio">*</span>
 
                     </label>
@@ -726,7 +412,6 @@
                     <label for="fechaNacimiento">
 
                         Fecha de nacimiento
-
                         <span class="obligatorio">*</span>
 
                     </label>
@@ -762,7 +447,6 @@
                     <label for="telefono">
 
                         Teléfono
-
                         <span class="obligatorio">*</span>
 
                     </label>
@@ -803,1899 +487,4 @@
                 <label>
 
                     Tipo de paciente
-
-                    <span class="obligatorio">*</span>
-
-                </label>
-
-
-                <div class="opciones">
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="tipoPaciente"
-                            value="nino"
-                            required
-                        >
-                        Niño/a
-                    </label>
-
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="tipoPaciente"
-                            value="adolescente"
-                        >
-                        Adolescente
-                    </label>
-
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="tipoPaciente"
-                            value="adulto"
-                        >
-                        Adulto
-                    </label>
-
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="tipoPaciente"
-                            value="adultoMayor"
-                        >
-                        Adulto mayor
-                    </label>
-
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="tipoPaciente"
-                            value="embarazada"
-                        >
-                        Embarazada
-                    </label>
-
-                </div>
-
-            </div>
-
-
-            <!-- =================================
-                 EMBARAZO
-            ================================== -->
-
-            <div
-                id="datosEmbarazo"
-                class="embarazo"
-            >
-
-                <strong>
-                    Información del embarazo
-                </strong>
-
-
-                <div
-                    class="grid"
-                    style="margin-top:15px;"
-                >
-
-                    <div class="campo">
-
-                        <label for="semanas">
-
-                            Semanas de gestación
-
-                        </label>
-
-                        <input
-                            type="number"
-                            id="semanas"
-                            min="1"
-                            max="45"
-                        >
-
-                    </div>
-
-
-                    <div class="campo">
-
-                        <label>
-
-                            Seguimiento prenatal
-
-                        </label>
-
-                        <div class="opciones">
-
-                            <label>
-
-                                <input
-                                    type="radio"
-                                    name="prenatal"
-                                    value="si"
-                                >
-
-                                Sí
-
-                            </label>
-
-
-                            <label>
-
-                                <input
-                                    type="radio"
-                                    name="prenatal"
-                                    value="no"
-                                >
-
-                                No
-
-                            </label>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </fieldset>
-
-
-        <!-- =====================================
-             2. ATENCIÓN MÉDICA
-        ====================================== -->
-
-        <fieldset>
-
-            <legend>
-                2. Atención médica
-            </legend>
-
-
-            <div class="grid">
-
-
-                <div class="campo">
-
-                    <label for="especialidad">
-
-                        Especialidad
-
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-
-                    <select
-                        id="especialidad"
-                        required
-                    >
-
-                        <option value="">
-                            Seleccione...
-                        </option>
-
-                        <option value="medicina-general">
-                            Medicina General
-                        </option>
-
-                        <option value="pediatria">
-                            Pediatría
-                        </option>
-
-                        <option value="ginecologia">
-                            Ginecología
-                        </option>
-
-                        <option value="cardiologia">
-                            Cardiología
-                        </option>
-
-                        <option value="geriatria">
-                            Geriatría
-                        </option>
-
-                        <option value="traumatologia">
-                            Traumatología
-                        </option>
-
-                        <option value="neurologia">
-                            Neurología
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="especialista">
-
-                        Especialista
-
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-
-                    <select
-                        id="especialista"
-                        required
-                    >
-
-                        <option value="">
-                            Seleccione especialidad...
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="campo campo-completo">
-
-                    <label for="motivo">
-
-                        Motivo de consulta
-
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-
-                    <textarea
-                        id="motivo"
-                        maxlength="500"
-                        required
-                        placeholder="Describa el motivo de la consulta..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-        </fieldset>
-
-
-        <!-- =====================================
-             3. URGENCIA
-        ====================================== -->
-
-        <fieldset>
-
-            <legend>
-                3. Nivel de urgencia
-            </legend>
-
-
-            <div class="urgencia">
-
-
-                <label class="no-urgente">
-
-                    <input
-                        type="radio"
-                        name="urgencia"
-                        value="no-urgente"
-                        required
-                    >
-
-                    <br><br>
-
-                    No urgente
-
-                </label>
-
-
-                <label class="prioritaria">
-
-                    <input
-                        type="radio"
-                        name="urgencia"
-                        value="prioritaria"
-                    >
-
-                    <br><br>
-
-                    Prioritaria
-
-                </label>
-
-
-                <label class="urgente">
-
-                    <input
-                        type="radio"
-                        name="urgencia"
-                        value="urgente"
-                    >
-
-                    <br><br>
-
-                    Urgente
-
-                </label>
-
-
-                <label class="emergencia">
-
-                    <input
-                        type="radio"
-                        name="urgencia"
-                        value="emergencia"
-                    >
-
-                    <br><br>
-
-                    Emergencia
-
-                </label>
-
-            </div>
-
-
-            <div
-                id="alertaEmergencia"
-                class="alerta error"
-            >
-
-                ⚠️ Las emergencias deben ser atendidas
-                directamente por el servicio de urgencias
-                y no mediante una cita programada.
-
-            </div>
-
-        </fieldset>
-
-
-        <!-- =====================================
-             4. PRIORIZACIÓN
-        ====================================== -->
-
-        <fieldset>
-
-            <legend>
-                4. Factores de priorización
-            </legend>
-
-
-            <div class="opciones">
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        id="menor"
-                    >
-
-                    Menor de edad
-
-                </label>
-
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        id="adultoMayor"
-                    >
-
-                    Adulto mayor
-
-                </label>
-
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        id="embarazada"
-                    >
-
-                    Embarazada
-
-                </label>
-
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        id="prioridadMedica"
-                    >
-
-                    Atención prioritaria indicada por médico
-
-                </label>
-
-            </div>
-
-
-            <div
-                class="campo"
-                style="margin-top:20px;"
-            >
-
-                <label for="observaciones">
-
-                    Observaciones
-
-                </label>
-
-
-                <textarea
-                    id="observaciones"
-                    maxlength="500"
-                    placeholder="Observaciones adicionales..."
-                ></textarea>
-
-            </div>
-
-        </fieldset>
-
-
-        <!-- =====================================
-             5. FECHA Y HORA
-        ====================================== -->
-
-        <fieldset>
-
-            <legend>
-                5. Fecha y horario
-            </legend>
-
-
-            <div class="grid">
-
-
-                <div class="campo">
-
-                    <label for="fechaCita">
-
-                        Fecha de la cita
-
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-
-                    <input
-                        type="date"
-                        id="fechaCita"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="horaCita">
-
-                        Hora de la cita
-
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-
-                    <input
-                        type="time"
-                        id="horaCita"
-                        min="07:00"
-                        max="18:00"
-                        step="1800"
-                        required
-                    >
-
-
-                    <div class="horario-info">
-
-                        🕐 Horario:
-
-                        <strong>
-                            07:00 - 18:00
-                        </strong>
-
-                        <br>
-
-                        Intervalos:
-
-                        <strong>
-                            30 minutos
-                        </strong>
-
-                        <br>
-
-                        ⚠️ Cada horario puede
-                        reservarse una sola vez
-                        por especialista.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="alertaHorario"
-                class="alerta error"
-            ></div>
-
-        </fieldset>
-
-
-        <!-- =====================================
-             6. CONFIRMACIÓN
-        ====================================== -->
-
-        <fieldset>
-
-            <legend>
-                6. Confirmación
-            </legend>
-
-
-            <label>
-
-                <input
-                    type="checkbox"
-                    id="confirmacion"
-                    required
-                >
-
-                Confirmo que los datos proporcionados
-                son correctos.
-
-                <span class="obligatorio">*</span>
-
-            </label>
-
-        </fieldset>
-
-
-        <button type="submit">
-
-            Registrar cita
-
-        </button>
-
-    </form>
-
-
-    <!-- =========================================
-         CONFIRMACIÓN
-    ========================================== -->
-
-    <div
-        id="exito"
-        class="exito"
-    >
-
-        <h2>
-            ✅ Cita registrada correctamente
-        </h2>
-
-
-        <p>
-            Folio de la cita:
-        </p>
-
-
-        <div
-            id="folio"
-            class="folio"
-        ></div>
-
-
-        <div class="datos-cita">
-
-            <p>
-                <strong>Paciente:</strong>
-                <span id="rPaciente"></span>
-            </p>
-
-
-            <p>
-                <strong>Especialidad:</strong>
-                <span id="rEspecialidad"></span>
-            </p>
-
-
-            <p>
-                <strong>Especialista:</strong>
-                <span id="rEspecialista"></span>
-            </p>
-
-
-            <p>
-                <strong>Fecha:</strong>
-                <span id="rFecha"></span>
-            </p>
-
-
-            <p>
-                <strong>Hora:</strong>
-                <span id="rHora"></span>
-            </p>
-
-
-            <p>
-                <strong>Prioridad:</strong>
-                <span id="rPrioridad"></span>
-            </p>
-
-        </div>
-
-
-        <button
-            type="button"
-            class="boton-nueva"
-            id="nuevaCita"
-        >
-
-            Registrar nueva cita
-
-        </button>
-
-    </div>
-
-
-    <!-- =========================================
-         CITAS REGISTRADAS
-    ========================================== -->
-
-    <div class="seccion-citas">
-
-        <h2>
-            📋 Citas registradas
-        </h2>
-
-
-        <div
-            id="listaCitas"
-            class="lista-citas"
-        ></div>
-
-    </div>
-
-
-</div>
-
-
-<script>
-
-
-/* =========================================
-   ESPECIALISTAS
-========================================= */
-
-const especialistas = {
-
-    "medicina-general": [
-        "Dr. Juan Pérez",
-        "Dra. Laura Martínez"
-    ],
-
-    "pediatria": [
-        "Dra. Ana López",
-        "Dr. Carlos Hernández"
-    ],
-
-    "ginecologia": [
-        "Dra. María González",
-        "Dra. Patricia Ramírez"
-    ],
-
-    "cardiologia": [
-        "Dr. Roberto Sánchez"
-    ],
-
-    "geriatria": [
-        "Dra. Elena Torres"
-    ],
-
-    "traumatologia": [
-        "Dr. Miguel Castillo"
-    ],
-
-    "neurologia": [
-        "Dra. Sofía Morales"
-    ]
-
-};
-
-
-/* =========================================
-   ELEMENTOS
-========================================= */
-
-const formulario =
-    document.getElementById("formCita");
-
-const fechaCita =
-    document.getElementById("fechaCita");
-
-const horaCita =
-    document.getElementById("horaCita");
-
-const fechaNacimiento =
-    document.getElementById("fechaNacimiento");
-
-const edad =
-    document.getElementById("edad");
-
-const especialidad =
-    document.getElementById("especialidad");
-
-const especialista =
-    document.getElementById("especialista");
-
-const alertaHorario =
-    document.getElementById("alertaHorario");
-
-const exito =
-    document.getElementById("exito");
-
-const listaCitas =
-    document.getElementById("listaCitas");
-
-
-/* =========================================
-   CITAS GUARDADAS
-========================================= */
-
-let citas =
-    JSON.parse(
-        localStorage.getItem("citasHospital")
-    ) || [];
-
-
-/* =========================================
-   FECHA ACTUAL
-========================================= */
-
-function obtenerFechaLocal() {
-
-    const ahora = new Date();
-
-    const año =
-        ahora.getFullYear();
-
-    const mes =
-        String(
-            ahora.getMonth() + 1
-        ).padStart(2, "0");
-
-    const dia =
-        String(
-            ahora.getDate()
-        ).padStart(2, "0");
-
-    return `${año}-${mes}-${dia}`;
-
-}
-
-
-function aplicarRestriccionesFecha() {
-
-    const hoy =
-        obtenerFechaLocal();
-
-    fechaCita.min = hoy;
-
-    fechaNacimiento.max = hoy;
-
-}
-
-
-aplicarRestriccionesFecha();
-
-
-/* =========================================
-   MOSTRAR ESPECIALISTAS
-========================================= */
-
-especialidad.addEventListener(
-    "change",
-    function() {
-
-        especialista.innerHTML =
-            '<option value="">Seleccione...</option>';
-
-        const lista =
-            especialistas[this.value] || [];
-
-
-        lista.forEach(
-            function(nombre) {
-
-                const option =
-                    document.createElement("option");
-
-                option.value = nombre;
-
-                option.textContent = nombre;
-
-                especialista.appendChild(option);
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================
-   CALCULAR EDAD
-========================================= */
-
-fechaNacimiento.addEventListener(
-    "change",
-    function() {
-
-        if (!this.value) {
-
-            edad.value = "";
-
-            return;
-
-        }
-
-
-        const nacimiento =
-            new Date(
-                this.value + "T00:00:00"
-            );
-
-        const ahora =
-            new Date();
-
-        let años =
-            ahora.getFullYear() -
-            nacimiento.getFullYear();
-
-
-        const diferenciaMes =
-            ahora.getMonth() -
-            nacimiento.getMonth();
-
-
-        if (
-            diferenciaMes < 0 ||
-            (
-                diferenciaMes === 0 &&
-                ahora.getDate() <
-                nacimiento.getDate()
-            )
-        ) {
-
-            años--;
-
-        }
-
-
-        if (años >= 0) {
-
-            edad.value = años;
-
-
-            document.getElementById(
-                "menor"
-            ).checked = años < 18;
-
-
-            document.getElementById(
-                "adultoMayor"
-            ).checked = años >= 60;
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   EMBARAZO
-========================================= */
-
-const datosEmbarazo =
-    document.getElementById(
-        "datosEmbarazo"
-    );
-
-
-const checkboxEmbarazada =
-    document.getElementById(
-        "embarazada"
-    );
-
-
-document.querySelectorAll(
-    'input[name="tipoPaciente"]'
-).forEach(
-    function(radio) {
-
-        radio.addEventListener(
-            "change",
-            function() {
-
-                if (
-                    this.value ===
-                    "embarazada"
-                ) {
-
-                    datosEmbarazo.style.display =
-                        "block";
-
-                    checkboxEmbarazada.checked =
-                        true;
-
-                } else {
-
-                    datosEmbarazo.style.display =
-                        "none";
-
-                    checkboxEmbarazada.checked =
-                        false;
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================
-   EMERGENCIA
-========================================= */
-
-const alertaEmergencia =
-    document.getElementById(
-        "alertaEmergencia"
-    );
-
-
-document.querySelectorAll(
-    'input[name="urgencia"]'
-).forEach(
-    function(radio) {
-
-        radio.addEventListener(
-            "change",
-            function() {
-
-                if (
-                    this.value ===
-                    "emergencia"
-                ) {
-
-                    alertaEmergencia.style.display =
-                        "block";
-
-                } else {
-
-                    alertaEmergencia.style.display =
-                        "none";
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================
-   COMPROBAR SI UNA CITA YA EXISTE
-========================================= */
-
-function citaYaExiste(
-    fecha,
-    hora,
-    especialistaSeleccionado
-) {
-
-    return citas.some(
-        function(cita) {
-
-            return (
-                cita.fecha === fecha &&
-                cita.hora === hora &&
-                cita.especialista ===
-                    especialistaSeleccionado
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   VALIDAR FECHA Y HORA
-========================================= */
-
-function validarFechaHora() {
-
-    alertaHorario.style.display =
-        "none";
-
-
-    if (
-        !fechaCita.value ||
-        !horaCita.value
-    ) {
-
-        return true;
-
-    }
-
-
-    const fechaHora =
-        new Date(
-            fechaCita.value +
-            "T" +
-            horaCita.value
-        );
-
-
-    const ahora =
-        new Date();
-
-
-    /* FECHA/HORA PASADA */
-
-    if (
-        fechaHora <= ahora
-    ) {
-
-        alertaHorario.textContent =
-            "❌ La fecha y hora seleccionadas ya han pasado.";
-
-        alertaHorario.style.display =
-            "block";
-
-        return false;
-
-    }
-
-
-    /* HORARIO */
-
-    const partes =
-        horaCita.value.split(":");
-
-
-    const horas =
-        parseInt(partes[0]);
-
-
-    const minutos =
-        parseInt(partes[1]);
-
-
-    const totalMinutos =
-        horas * 60 + minutos;
-
-
-    const inicio =
-        7 * 60;
-
-
-    const fin =
-        18 * 60;
-
-
-    if (
-        totalMinutos < inicio ||
-        totalMinutos > fin
-    ) {
-
-        alertaHorario.textContent =
-            "❌ El horario permitido es de 07:00 a 18:00.";
-
-        alertaHorario.style.display =
-            "block";
-
-        return false;
-
-    }
-
-
-    /* INTERVALOS */
-
-    if (
-        minutos !== 0 &&
-        minutos !== 30
-    ) {
-
-        alertaHorario.textContent =
-            "❌ Las citas deben programarse en intervalos de 30 minutos.";
-
-        alertaHorario.style.display =
-            "block";
-
-        return false;
-
-    }
-
-
-    /* =====================================
-       CITA REPETIDA
-    ====================================== */
-
-    if (
-        especialista.value &&
-        citaYaExiste(
-            fechaCita.value,
-            horaCita.value,
-            especialista.value
-        )
-    ) {
-
-        alertaHorario.textContent =
-            "❌ Ese horario ya está ocupado para este especialista. Selecciona otra fecha u otra hora.";
-
-        alertaHorario.style.display =
-            "block";
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-fechaCita.addEventListener(
-    "change",
-    validarFechaHora
-);
-
-
-horaCita.addEventListener(
-    "change",
-    validarFechaHora
-);
-
-
-especialista.addEventListener(
-    "change",
-    validarFechaHora
-);
-
-
-/* =========================================
-   CALCULAR PRIORIDAD
-========================================= */
-
-function calcularPrioridad() {
-
-    const urgencia =
-        document.querySelector(
-            'input[name="urgencia"]:checked'
-        );
-
-
-    if (!urgencia) {
-
-        return "No determinada";
-
-    }
-
-
-    if (
-        urgencia.value ===
-        "emergencia"
-    ) {
-
-        return "EMERGENCIA";
-
-    }
-
-
-    if (
-        urgencia.value ===
-        "urgente"
-    ) {
-
-        return "URGENTE";
-
-    }
-
-
-    let puntos = 0;
-
-
-    if (
-        document.getElementById(
-            "menor"
-        ).checked
-    ) {
-
-        puntos++;
-
-    }
-
-
-    if (
-        document.getElementById(
-            "adultoMayor"
-        ).checked
-    ) {
-
-        puntos++;
-
-    }
-
-
-    if (
-        document.getElementById(
-            "embarazada"
-        ).checked
-    ) {
-
-        puntos++;
-
-    }
-
-
-    if (
-        document.getElementById(
-            "prioridadMedica"
-        ).checked
-    ) {
-
-        puntos += 2;
-
-    }
-
-
-    if (
-        urgencia.value ===
-        "prioritaria"
-    ) {
-
-        puntos += 2;
-
-    }
-
-
-    if (puntos >= 4) {
-
-        return "PRIORIDAD ALTA";
-
-    }
-
-
-    if (puntos >= 2) {
-
-        return "PRIORIDAD MEDIA";
-
-    }
-
-
-    return "NORMAL";
-
-}
-
-
-/* =========================================
-   GENERAR FOLIO
-========================================= */
-
-function generarFolio() {
-
-    let folio;
-
-    do {
-
-        const fecha =
-            new Date();
-
-        const año =
-            fecha.getFullYear();
-
-
-        const numero =
-            Math.floor(
-                100000 +
-                Math.random() * 900000
-            );
-
-
-        folio =
-            `HOSP-${año}-${numero}`;
-
-    } while (
-        citas.some(
-            cita => cita.folio === folio
-        )
-    );
-
-
-    return folio;
-
-}
-
-
-/* =========================================
-   FORMATEAR FECHA
-========================================= */
-
-function formatearFecha(fecha) {
-
-    return new Date(
-        fecha + "T00:00:00"
-    ).toLocaleDateString(
-        "es-MX",
-        {
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
-        }
-    );
-
-}
-
-
-/* =========================================
-   REGISTRAR CITA
-========================================= */
-
-formulario.addEventListener(
-    "submit",
-    function(evento) {
-
-        evento.preventDefault();
-
-
-        /* VALIDAR FECHA/HORA */
-
-        if (
-            !validarFechaHora()
-        ) {
-
-            return;
-
-        }
-
-
-        /* VALIDAR ESPECIALISTA */
-
-        if (
-            !especialista.value
-        ) {
-
-            alert(
-                "Debe seleccionar un especialista."
-            );
-
-            return;
-
-        }
-
-
-        /* VALIDAR EMBARAZO */
-
-        const tipoPaciente =
-            document.querySelector(
-                'input[name="tipoPaciente"]:checked'
-            );
-
-
-        if (
-            tipoPaciente &&
-            tipoPaciente.value ===
-            "embarazada"
-        ) {
-
-            const semanas =
-                document.getElementById(
-                    "semanas"
-                ).value;
-
-
-            if (!semanas) {
-
-                alert(
-                    "Debe indicar las semanas de gestación."
-                );
-
-                return;
-
-            }
-
-        }
-
-
-        /* NO PERMITIR EMERGENCIA */
-
-        const urgencia =
-            document.querySelector(
-                'input[name="urgencia"]:checked'
-            );
-
-
-        if (
-            urgencia &&
-            urgencia.value ===
-            "emergencia"
-        ) {
-
-            alert(
-                "⚠️ Las emergencias deben atenderse directamente en urgencias."
-            );
-
-            return;
-
-        }
-
-
-        /* =====================================
-           SEGUNDA COMPROBACIÓN DE CITA DUPLICADA
-           ===================================== */
-
-        if (
-            citaYaExiste(
-                fechaCita.value,
-                horaCita.value,
-                especialista.value
-            )
-        ) {
-
-            alertaHorario.textContent =
-                "❌ Esta cita ya existe. Debes seleccionar otra fecha u otro horario.";
-
-            alertaHorario.style.display =
-                "block";
-
-            fechaCita.focus();
-
-            return;
-
-        }
-
-
-        /* =====================================
-           GENERAR DATOS
-        ====================================== */
-
-        const folio =
-            generarFolio();
-
-
-        const prioridad =
-            calcularPrioridad();
-
-
-        const cita = {
-
-            folio: folio,
-
-            nombre:
-                document.getElementById(
-                    "nombre"
-                ).value.trim(),
-
-            fechaNacimiento:
-                fechaNacimiento.value,
-
-            edad:
-                edad.value,
-
-            telefono:
-                document.getElementById(
-                    "telefono"
-                ).value,
-
-            curp:
-                document.getElementById(
-                    "curp"
-                ).value,
-
-            especialidad:
-                especialidad.options[
-                    especialidad.selectedIndex
-                ].text,
-
-            especialidadCodigo:
-                especialidad.value,
-
-            especialista:
-                especialista.value,
-
-            motivo:
-                document.getElementById(
-                    "motivo"
-                ).value.trim(),
-
-            fecha:
-                fechaCita.value,
-
-            hora:
-                horaCita.value,
-
-            prioridad:
-                prioridad,
-
-            observaciones:
-                document.getElementById(
-                    "observaciones"
-                ).value.trim(),
-
-            fechaRegistro:
-                new Date().toISOString()
-
-        };
-
-
-        /* =====================================
-           GUARDAR CITA
-        ====================================== */
-
-        citas.push(cita);
-
-
-        localStorage.setItem(
-            "citasHospital",
-            JSON.stringify(citas)
-        );
-
-
-        /* =====================================
-           MOSTRAR CONFIRMACIÓN
-        ====================================== */
-
-        document.getElementById(
-            "folio"
-        ).textContent =
-            folio;
-
-
-        document.getElementById(
-            "rPaciente"
-        ).textContent =
-            cita.nombre;
-
-
-        document.getElementById(
-            "rEspecialidad"
-        ).textContent =
-            cita.especialidad;
-
-
-        document.getElementById(
-            "rEspecialista"
-        ).textContent =
-            cita.especialista;
-
-
-        document.getElementById(
-            "rFecha"
-        ).textContent =
-            formatearFecha(
-                cita.fecha
-            );
-
-
-        document.getElementById(
-            "rHora"
-        ).textContent =
-            cita.hora;
-
-
-        document.getElementById(
-            "rPrioridad"
-        ).textContent =
-            cita.prioridad;
-
-
-        /* OCULTAR FORMULARIO */
-
-        formulario.style.display =
-            "none";
-
-
-        /* MOSTRAR CONFIRMACIÓN */
-
-        exito.style.display =
-            "block";
-
-
-        /* ACTUALIZAR LISTA */
-
-        mostrarCitas();
-
-
-        /* SUBIR */
-
-        exito.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   MOSTRAR CITAS
-========================================= */
-
-function mostrarCitas() {
-
-    listaCitas.innerHTML = "";
-
-
-    if (citas.length === 0) {
-
-        listaCitas.innerHTML = `
-            <div class="sin-citas">
-                No hay citas registradas.
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    /* ORDENAR POR FECHA Y HORA */
-
-    const citasOrdenadas =
-        [...citas].sort(
-            function(a, b) {
-
-                return (
-                    new Date(
-                        a.fecha +
-                        "T" +
-                        a.hora
-                    ) -
-                    new Date(
-                        b.fecha +
-                        "T" +
-                        b.hora
-                    )
-                );
-
-            }
-        );
-
-
-    citasOrdenadas.forEach(
-        function(cita) {
-
-            const tarjeta =
-                document.createElement(
-                    "div"
-                );
-
-
-            tarjeta.className =
-                "cita-card";
-
-
-            tarjeta.innerHTML = `
-
-                <h3>
-                    🏥 ${cita.especialidad}
-                </h3>
-
-                <p class="folio-card">
-                    Folio: ${cita.folio}
-                </p>
-
-                <p>
-                    <strong>Paciente:</strong>
-                    ${cita.nombre}
-                </p>
-
-                <p>
-                    <strong>Especialista:</strong>
-                    ${cita.especialista}
-                </p>
-
-                <p>
-                    <strong>Fecha:</strong>
-                    ${formatearFecha(cita.fecha)}
-                </p>
-
-                <p>
-                    <strong>Hora:</strong>
-                    ${cita.hora}
-                </p>
-
-                <p>
-                    <strong>Prioridad:</strong>
-                    ${cita.prioridad}
-                </p>
-
-                <button
-                    type="button"
-                    class="boton-cancelar"
-                    onclick="cancelarCita('${cita.folio}')"
-                >
-                    ❌ Cancelar cita
-                </button>
-
-            `;
-
-
-            listaCitas.appendChild(
-                tarjeta
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   CANCELAR CITA
-========================================= */
-
-function cancelarCita(folio) {
-
-    const cita =
-        citas.find(
-            function(item) {
-
-                return item.folio === folio;
-
-            }
-        );
-
-
-    if (!cita) {
-
-        alert(
-            "No se encontró la cita."
-        );
-
-        return;
-
-    }
-
-
-    const confirmar =
-        confirm(
-            "¿Estás seguro de que deseas cancelar esta cita?\n\n" +
-
-            "Folio: " +
-            cita.folio +
-
-            "\nPaciente: " +
-            cita.nombre +
-
-            "\nFecha: " +
-            formatearFecha(cita.fecha) +
-
-            "\nHora: " +
-            cita.hora
-        );
-
-
-    if (!confirmar) {
-
-        return;
-
-    }
-
-
-    /* ELIMINAR CITA */
-
-    citas =
-        citas.filter(
-            function(item) {
-
-                return item.folio !== folio;
-
-            }
-        );
-
-
-    /* GUARDAR CAMBIOS */
-
-    localStorage.setItem(
-        "citasHospital",
-        JSON.stringify(citas)
-    );
-
-
-    /* ACTUALIZAR */
-
-    mostrarCitas();
-
-
-    alert(
-        "✅ La cita fue cancelada correctamente."
-    );
-
-}
-
-
-/* =========================================
-   NUEVA CITA
-========================================= */
-
-document.getElementById(
-    "nuevaCita"
-).addEventListener(
-    "click",
-    function() {
-
-        formulario.reset();
-
-
-        edad.value = "";
-
-
-        especialista.innerHTML =
-            '<option value="">Seleccione especialidad...</option>';
-
-
-        datosEmbarazo.style.display =
-            "none";
-
-
-        alertaHorario.style.display =
-            "none";
-
-
-        alertaEmergencia.style.display =
-            "none";
-
-
-        exito.style.display =
-            "none";
-
-
-        formulario.style.display =
-            "block";
-
-
-        aplicarRestriccionesFecha();
-
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-        });
-
-    }
-);
-
-
-/* =========================================
-   MOSTRAR CITAS AL CARGAR
-========================================= */
-
-mostrarCitas();
-
-
-</script>
-
-</body>
-
-</html>
+                    <
