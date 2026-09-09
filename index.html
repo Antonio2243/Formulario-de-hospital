@@ -1,490 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Sistema Hospitalario - Citas</title>
-
+    <title>Juego del Ahorcado</title>
+ 
     <style>
-
         * {
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
-
+ 
         body {
             margin: 0;
-            background: #eef4f7;
-            color: #263238;
-        }
-
-        .container {
-            width: 100%;
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
+        }
+ 
+        .juego {
             background: white;
-            padding: 35px 5%;
-        }
-
-        .encabezado {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .encabezado h1 {
-            color: #00695c;
-            margin-bottom: 8px;
-            font-size: 32px;
-        }
-
-        .encabezado p {
-            color: #607d8b;
-            font-size: 16px;
-        }
-
-        fieldset {
-            border: 1px solid #cfd8dc;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-
-        legend {
-            font-weight: bold;
-            color: #00695c;
-            padding: 0 10px;
-            font-size: 17px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .campo {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .campo-completo {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #b0bec5;
-            border-radius: 7px;
-            font-size: 15px;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #00897b;
-            box-shadow: 0 0 0 3px rgba(0,137,123,.12);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .opciones {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            margin-top: 8px;
-        }
-
-        .opciones label {
-            font-weight: normal;
-        }
-
-        .urgencia {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .urgencia label {
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid #cfd8dc;
-        }
-
-        .no-urgente {
-            background: #e8f5e9;
-        }
-
-        .prioritaria {
-            background: #fff8e1;
-        }
-
-        .urgente {
-            background: #fff3e0;
-        }
-
-        .emergencia {
-            background: #ffebee;
-            color: #b71c1c;
-        }
-
-        .embarazo {
-            display: none;
-            background: #fce4ec;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-
-        .alerta {
-            display: none;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 7px;
-        }
-
-        .error {
-            background: #ffebee;
-            color: #c62828;
-            border: 1px solid #ef9a9a;
-        }
-
-        .info {
-            background: #e3f2fd;
-            color: #1565c0;
-            border: 1px solid #90caf9;
-        }
-
-        .exito {
-            display: none;
-            margin-top: 25px;
+            width: 90%;
+            max-width: 800px;
             padding: 30px;
-            border-radius: 10px;
-            background: #e8f5e9;
-            border: 1px solid #81c784;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             text-align: center;
         }
-
-        .exito h2 {
-            color: #2e7d32;
+ 
+        h1 {
+            color: #263238;
+            margin-top: 0;
         }
-
-        .folio {
-            font-size: 28px;
-            font-weight: bold;
-            color: #00695c;
-            letter-spacing: 2px;
-            margin: 15px 0;
+ 
+        .contenido {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
-
-        .datos-cita {
-            text-align: left;
-            max-width: 600px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .datos-cita p {
-            margin: 10px 0;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 7px;
-            background: #00796b;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #004d40;
-        }
-
-        .boton-nueva {
-            background: #1565c0;
-            margin-top: 15px;
-        }
-
-        .boton-nueva:hover {
-            background: #0d47a1;
-        }
-
-        .obligatorio {
-            color: #d32f2f;
-        }
-
-        .horario-info {
-            margin-top: 8px;
-            padding: 10px;
-            background: #e3f2fd;
-            color: #1565c0;
-            border-radius: 6px;
-            font-size: 13px;
-        }
-
-        /* =====================================
-           LISTA DE CITAS
-        ===================================== */
-
-        #seccionCitas {
-            margin-top: 40px;
-        }
-
-        .titulo-citas {
-            color: #00695c;
-            margin-bottom: 15px;
-        }
-
-        .lista-citas {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .cita-card {
-            border: 1px solid #cfd8dc;
-            border-left: 6px solid #00796b;
+ 
+        canvas {
+            border: 2px solid #ddd;
             border-radius: 10px;
-            padding: 20px;
             background: #fafafa;
         }
-
-        .cita-card h3 {
-            margin-top: 0;
-            color: #00695c;
+ 
+        #palabra {
+            font-size: 35px;
+            letter-spacing: 10px;
+            margin: 25px 0;
+            color: #222;
+            min-height: 50px;
         }
-
-        .cita-card p {
-            margin: 8px 0;
+ 
+        .info {
+            min-width: 280px;
         }
-
-        .boton-cancelar {
-            margin-top: 15px;
-            background: #d32f2f;
-            font-size: 15px;
-            padding: 11px;
-        }
-
-        .boton-cancelar:hover {
-            background: #b71c1c;
-        }
-
-        .sin-citas {
-            background: #f5f5f5;
-            padding: 25px;
+ 
+        #letra {
+            width: 70px;
+            height: 45px;
+            font-size: 25px;
             text-align: center;
-            color: #607d8b;
+            text-transform: uppercase;
+            border: 2px solid #555;
             border-radius: 8px;
         }
-
-        .estado {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            background: #e8f5e9;
-            color: #2e7d32;
+ 
+        button {
+            padding: 12px 20px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            background: #1976d2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+ 
+        button:hover {
+            background: #0d47a1;
+        }
+ 
+        #mensaje {
+            font-size: 22px;
             font-weight: bold;
-            font-size: 13px;
+            margin: 20px;
         }
-
-        @media(max-width: 800px) {
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .urgencia {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .lista-citas {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 25px 15px;
-            }
+ 
+        #letrasUsadas {
+            color: #555;
+            margin-top: 15px;
         }
-
-        @media(max-width: 500px) {
-
-            .urgencia {
-                grid-template-columns: 1fr;
-            }
-
-            .encabezado h1 {
-                font-size: 25px;
-            }
+ 
+        .ganaste {
+            color: green;
         }
-
+ 
+        .perdiste {
+            color: red;
+        }
     </style>
-
 </head>
-
-
+ 
 <body>
-
-
-<div class="container">
-
-
-    <!-- =====================================
-         ENCABEZADO
-    ====================================== -->
-
-    <div class="encabezado">
-
-        <h1>
-            🏥 Sistema de Citas Hospitalarias
-        </h1>
-
-        <p>
-            Registro y programación de citas médicas
-        </p>
-
-    </div>
-
-
-    <!-- =====================================
-         FORMULARIO
-    ====================================== -->
-
-    <form id="formCita">
-
-
-        <!-- PACIENTE -->
-
-        <fieldset>
-
-            <legend>
-                1. Datos del paciente
-            </legend>
-
-
-            <div class="grid">
-
-
-                <div class="campo campo-completo">
-
-                    <label for="nombre">
-
-                        Nombre completo
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nombre"
-                        required
-                        minlength="3"
-                        maxlength="100"
-                        placeholder="Nombre y apellidos"
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="fechaNacimiento">
-
-                        Fecha de nacimiento
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-                    <input
-                        type="date"
-                        id="fechaNacimiento"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="edad">
-
-                        Edad
-
-                    </label>
-
-                    <input
-                        type="number"
-                        id="edad"
-                        readonly
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="telefono">
-
-                        Teléfono
-                        <span class="obligatorio">*</span>
-
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="telefono"
-                        required
-                        pattern="[0-9]{10}"
-                        placeholder="10 dígitos"
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="curp">
-
-                        CURP / Identificador
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="curp"
-                        maxlength="18"
-                        placeholder="CURP"
-                    >
-
-                </div>
-
+ 
+    <div class="juego">
+ 
+        <h1>🎮 Juego del Ahorcado</h1>
+ 
+        <div class="contenido">
+ 
+            <canvas id="canvas" width="300" height="300"></canvas>
+ 
+            <div class="info">
+ 
+                <p>Adivina la palabra:</p>
+ 
+                <div id="palabra"></div>
+ 
+                <input
+                    type="text"
+                    id="letra"
+                    maxlength="1"
+                    autocomplete="off"
+                >
+ 
+                <br>
+ 
+                <button onclick="adivinarLetra()">
+                    Adivinar letra
+                </button>
+ 
+                <button onclick="nuevoJuego()">
+                    Nuevo juego
+                </button>
+ 
+                <p id="letrasUsadas">
+                    Letras usadas: ninguna
+                </p>
+ 
+                <p id="errores">
+                    Errores: 0 / 6
+                </p>
+ 
+                <div id="mensaje"></div>
+ 
             </div>
-
-
-            <div style="margin-top:20px;">
-
-                <label>
-
-                    Tipo de paciente
-                    <
+ 
+        </div>
+ 
+    </div>
+ 
+    <script src="juego.js"></script>
+ 
+</body>
+</html>
