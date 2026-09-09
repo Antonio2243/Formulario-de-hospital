@@ -21,9 +21,15 @@
         }
 
 
+        html,
         body {
-
             margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+
+        body {
 
             background: #eef4f7;
 
@@ -32,21 +38,21 @@
         }
 
 
+        /* =========================================
+           CONTENEDOR PRINCIPAL - TODA LA PANTALLA
+        ========================================= */
+
         .container {
 
-            max-width: 950px;
+            width: 100%;
 
-            margin: 30px auto;
+            min-height: 100vh;
+
+            margin: 0;
 
             background: white;
 
-            padding: 30px;
-
-            border-radius: 12px;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,.12);
+            padding: 35px 5%;
 
         }
 
@@ -55,7 +61,7 @@
 
             text-align: center;
 
-            margin-bottom: 30px;
+            margin-bottom: 35px;
 
         }
 
@@ -66,12 +72,27 @@
 
             margin-bottom: 5px;
 
+            font-size: 32px;
+
         }
 
 
         .encabezado p {
 
             color: #607d8b;
+
+            font-size: 16px;
+
+        }
+
+
+        /* =========================================
+           FORMULARIO
+        ========================================= */
+
+        #formCita {
+
+            width: 100%;
 
         }
 
@@ -80,11 +101,13 @@
 
             border: 1px solid #cfd8dc;
 
-            border-radius: 8px;
+            border-radius: 10px;
 
-            padding: 20px;
+            padding: 25px;
 
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+
+            background: #ffffff;
 
         }
 
@@ -95,7 +118,9 @@
 
             color: #00695c;
 
-            padding: 0 8px;
+            padding: 0 10px;
+
+            font-size: 18px;
 
         }
 
@@ -107,7 +132,7 @@
             grid-template-columns:
                 repeat(2, 1fr);
 
-            gap: 15px;
+            gap: 20px;
 
         }
 
@@ -132,7 +157,7 @@
 
             font-weight: bold;
 
-            margin-bottom: 6px;
+            margin-bottom: 7px;
 
         }
 
@@ -141,13 +166,17 @@
         select,
         textarea {
 
-            padding: 11px;
+            width: 100%;
+
+            padding: 13px;
 
             border: 1px solid #b0bec5;
 
-            border-radius: 6px;
+            border-radius: 7px;
 
             font-size: 15px;
+
+            background: white;
 
         }
 
@@ -161,7 +190,7 @@
             border-color: #00897b;
 
             box-shadow:
-                0 0 0 2px
+                0 0 0 3px
                 rgba(0,137,123,.12);
 
         }
@@ -169,7 +198,7 @@
 
         textarea {
 
-            min-height: 90px;
+            min-height: 100px;
 
             resize: vertical;
 
@@ -182,7 +211,7 @@
 
             flex-wrap: wrap;
 
-            gap: 15px;
+            gap: 20px;
 
             margin-top: 8px;
 
@@ -203,14 +232,14 @@
             grid-template-columns:
                 repeat(4, 1fr);
 
-            gap: 10px;
+            gap: 15px;
 
         }
 
 
         .urgencia label {
 
-            padding: 15px;
+            padding: 18px;
 
             border-radius: 8px;
 
@@ -219,6 +248,19 @@
             cursor: pointer;
 
             border: 1px solid #cfd8dc;
+
+            transition: .2s;
+
+        }
+
+
+        .urgencia label:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 4px 10px
+                rgba(0,0,0,.08);
 
         }
 
@@ -259,9 +301,9 @@
 
             background: #fce4ec;
 
-            padding: 15px;
+            padding: 20px;
 
-            margin-top: 15px;
+            margin-top: 18px;
 
             border-radius: 8px;
 
@@ -309,7 +351,7 @@
 
             margin-top: 25px;
 
-            padding: 25px;
+            padding: 30px;
 
             border-radius: 10px;
 
@@ -348,13 +390,13 @@
 
             text-align: left;
 
-            max-width: 500px;
+            max-width: 600px;
 
             margin: 20px auto;
 
             background: white;
 
-            padding: 15px;
+            padding: 20px;
 
             border-radius: 8px;
 
@@ -363,7 +405,7 @@
 
         .datos-cita p {
 
-            margin: 8px 0;
+            margin: 10px 0;
 
         }
 
@@ -372,7 +414,7 @@
 
             width: 100%;
 
-            padding: 14px;
+            padding: 15px;
 
             border: none;
 
@@ -387,6 +429,8 @@
             font-weight: bold;
 
             cursor: pointer;
+
+            transition: .2s;
 
         }
 
@@ -410,6 +454,26 @@
         .boton-nueva:hover {
 
             background: #0d47a1;
+
+        }
+
+
+        .boton-cancelar {
+
+            background: #d32f2f;
+
+            padding: 10px 15px;
+
+            width: auto;
+
+            font-size: 14px;
+
+        }
+
+
+        .boton-cancelar:hover {
+
+            background: #b71c1c;
 
         }
 
@@ -438,7 +502,124 @@
         }
 
 
+        /* =========================================
+           CITAS REGISTRADAS
+        ========================================= */
+
+        .seccion-citas {
+
+            margin-top: 40px;
+
+            padding-top: 30px;
+
+            border-top: 2px solid #e0e0e0;
+
+        }
+
+
+        .seccion-citas h2 {
+
+            color: #00695c;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .lista-citas {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .cita-card {
+
+            border: 1px solid #cfd8dc;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            background: #f8fafb;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0,0,0,.06);
+
+        }
+
+
+        .cita-card h3 {
+
+            color: #00695c;
+
+            margin-top: 0;
+
+        }
+
+
+        .cita-card p {
+
+            margin: 8px 0;
+
+            font-size: 14px;
+
+        }
+
+
+        .cita-card .folio-card {
+
+            color: #1565c0;
+
+            font-weight: bold;
+
+        }
+
+
+        .sin-citas {
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: #f5f5f5;
+
+            border-radius: 8px;
+
+            color: #78909c;
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media(max-width:900px) {
+
+            .lista-citas {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+        }
+
+
         @media(max-width:700px) {
+
+            .container {
+
+                padding: 20px 15px;
+
+            }
+
 
             .grid {
 
@@ -454,11 +635,16 @@
             }
 
 
-            .container {
+            .lista-citas {
 
-                margin: 10px;
+                grid-template-columns: 1fr;
 
-                padding: 20px;
+            }
+
+
+            .encabezado h1 {
+
+                font-size: 25px;
 
             }
 
@@ -475,7 +661,9 @@
 <div class="container">
 
 
-    <!-- ENCABEZADO -->
+    <!-- =========================================
+         ENCABEZADO
+    ========================================== -->
 
     <div class="encabezado">
 
@@ -490,14 +678,16 @@
     </div>
 
 
-    <!-- ========================== -->
-    <!-- FORMULARIO -->
-    <!-- ========================== -->
+    <!-- =========================================
+         FORMULARIO
+    ========================================== -->
 
     <form id="formCita">
 
 
-        <!-- PACIENTE -->
+        <!-- =====================================
+             1. DATOS DEL PACIENTE
+        ====================================== -->
 
         <fieldset>
 
@@ -514,6 +704,7 @@
                     <label for="nombre">
 
                         Nombre completo
+
                         <span class="obligatorio">*</span>
 
                     </label>
@@ -535,6 +726,7 @@
                     <label for="fechaNacimiento">
 
                         Fecha de nacimiento
+
                         <span class="obligatorio">*</span>
 
                     </label>
@@ -570,6 +762,7 @@
                     <label for="telefono">
 
                         Teléfono
+
                         <span class="obligatorio">*</span>
 
                     </label>
@@ -605,11 +798,12 @@
             </div>
 
 
-            <div style="margin-top:15px;">
+            <div style="margin-top:20px;">
 
                 <label>
 
                     Tipo de paciente
+
                     <span class="obligatorio">*</span>
 
                 </label>
@@ -672,7 +866,9 @@
             </div>
 
 
-            <!-- EMBARAZO -->
+            <!-- =================================
+                 EMBARAZO
+            ================================== -->
 
             <div
                 id="datosEmbarazo"
@@ -684,8 +880,10 @@
                 </strong>
 
 
-                <div class="grid"
-                     style="margin-top:15px;">
+                <div
+                    class="grid"
+                    style="margin-top:15px;"
+                >
 
                     <div class="campo">
 
@@ -716,21 +914,28 @@
                         <div class="opciones">
 
                             <label>
+
                                 <input
                                     type="radio"
                                     name="prenatal"
                                     value="si"
                                 >
+
                                 Sí
+
                             </label>
 
+
                             <label>
+
                                 <input
                                     type="radio"
                                     name="prenatal"
                                     value="no"
                                 >
+
                                 No
+
                             </label>
 
                         </div>
@@ -744,7 +949,9 @@
         </fieldset>
 
 
-        <!-- ESPECIALIDAD -->
+        <!-- =====================================
+             2. ATENCIÓN MÉDICA
+        ====================================== -->
 
         <fieldset>
 
@@ -761,9 +968,11 @@
                     <label for="especialidad">
 
                         Especialidad
+
                         <span class="obligatorio">*</span>
 
                     </label>
+
 
                     <select
                         id="especialidad"
@@ -812,9 +1021,11 @@
                     <label for="especialista">
 
                         Especialista
+
                         <span class="obligatorio">*</span>
 
                     </label>
+
 
                     <select
                         id="especialista"
@@ -835,9 +1046,11 @@
                     <label for="motivo">
 
                         Motivo de consulta
+
                         <span class="obligatorio">*</span>
 
                     </label>
+
 
                     <textarea
                         id="motivo"
@@ -853,7 +1066,9 @@
         </fieldset>
 
 
-        <!-- URGENCIA -->
+        <!-- =====================================
+             3. URGENCIA
+        ====================================== -->
 
         <fieldset>
 
@@ -874,7 +1089,7 @@
                         required
                     >
 
-                    <br>
+                    <br><br>
 
                     No urgente
 
@@ -889,7 +1104,7 @@
                         value="prioritaria"
                     >
 
-                    <br>
+                    <br><br>
 
                     Prioritaria
 
@@ -904,7 +1119,7 @@
                         value="urgente"
                     >
 
-                    <br>
+                    <br><br>
 
                     Urgente
 
@@ -919,7 +1134,7 @@
                         value="emergencia"
                     >
 
-                    <br>
+                    <br><br>
 
                     Emergencia
 
@@ -942,7 +1157,9 @@
         </fieldset>
 
 
-        <!-- PRIORIZACIÓN -->
+        <!-- =====================================
+             4. PRIORIZACIÓN
+        ====================================== -->
 
         <fieldset>
 
@@ -1003,8 +1220,10 @@
             </div>
 
 
-            <div class="campo"
-                 style="margin-top:15px;">
+            <div
+                class="campo"
+                style="margin-top:20px;"
+            >
 
                 <label for="observaciones">
 
@@ -1012,9 +1231,11 @@
 
                 </label>
 
+
                 <textarea
                     id="observaciones"
                     maxlength="500"
+                    placeholder="Observaciones adicionales..."
                 ></textarea>
 
             </div>
@@ -1022,7 +1243,9 @@
         </fieldset>
 
 
-        <!-- FECHA Y HORA -->
+        <!-- =====================================
+             5. FECHA Y HORA
+        ====================================== -->
 
         <fieldset>
 
@@ -1039,9 +1262,11 @@
                     <label for="fechaCita">
 
                         Fecha de la cita
+
                         <span class="obligatorio">*</span>
 
                     </label>
+
 
                     <input
                         type="date"
@@ -1057,9 +1282,11 @@
                     <label for="horaCita">
 
                         Hora de la cita
+
                         <span class="obligatorio">*</span>
 
                     </label>
+
 
                     <input
                         type="time"
@@ -1074,6 +1301,7 @@
                     <div class="horario-info">
 
                         🕐 Horario:
+
                         <strong>
                             07:00 - 18:00
                         </strong>
@@ -1081,9 +1309,16 @@
                         <br>
 
                         Intervalos:
+
                         <strong>
                             30 minutos
                         </strong>
+
+                        <br>
+
+                        ⚠️ Cada horario puede
+                        reservarse una sola vez
+                        por especialista.
 
                     </div>
 
@@ -1100,7 +1335,9 @@
         </fieldset>
 
 
-        <!-- CONFIRMACIÓN -->
+        <!-- =====================================
+             6. CONFIRMACIÓN
+        ====================================== -->
 
         <fieldset>
 
@@ -1136,9 +1373,9 @@
     </form>
 
 
-    <!-- ========================== -->
-    <!-- CONFIRMACIÓN DE CITA -->
-    <!-- ========================== -->
+    <!-- =========================================
+         CONFIRMACIÓN
+    ========================================== -->
 
     <div
         id="exito"
@@ -1168,25 +1405,30 @@
                 <span id="rPaciente"></span>
             </p>
 
+
             <p>
                 <strong>Especialidad:</strong>
                 <span id="rEspecialidad"></span>
             </p>
+
 
             <p>
                 <strong>Especialista:</strong>
                 <span id="rEspecialista"></span>
             </p>
 
+
             <p>
                 <strong>Fecha:</strong>
                 <span id="rFecha"></span>
             </p>
 
+
             <p>
                 <strong>Hora:</strong>
                 <span id="rHora"></span>
             </p>
+
 
             <p>
                 <strong>Prioridad:</strong>
@@ -1207,6 +1449,26 @@
         </button>
 
     </div>
+
+
+    <!-- =========================================
+         CITAS REGISTRADAS
+    ========================================== -->
+
+    <div class="seccion-citas">
+
+        <h2>
+            📋 Citas registradas
+        </h2>
+
+
+        <div
+            id="listaCitas"
+            class="lista-citas"
+        ></div>
+
+    </div>
+
 
 </div>
 
@@ -1285,6 +1547,19 @@ const alertaHorario =
 const exito =
     document.getElementById("exito");
 
+const listaCitas =
+    document.getElementById("listaCitas");
+
+
+/* =========================================
+   CITAS GUARDADAS
+========================================= */
+
+let citas =
+    JSON.parse(
+        localStorage.getItem("citasHospital")
+    ) || [];
+
 
 /* =========================================
    FECHA ACTUAL
@@ -1308,6 +1583,7 @@ function obtenerFechaLocal() {
         ).padStart(2, "0");
 
     return `${año}-${mes}-${dia}`;
+
 }
 
 
@@ -1327,7 +1603,7 @@ aplicarRestriccionesFecha();
 
 
 /* =========================================
-   ESPECIALISTAS
+   MOSTRAR ESPECIALISTAS
 ========================================= */
 
 especialidad.addEventListener(
@@ -1367,6 +1643,15 @@ especialidad.addEventListener(
 fechaNacimiento.addEventListener(
     "change",
     function() {
+
+        if (!this.value) {
+
+            edad.value = "";
+
+            return;
+
+        }
+
 
         const nacimiento =
             new Date(
@@ -1515,6 +1800,32 @@ document.querySelectorAll(
 
 
 /* =========================================
+   COMPROBAR SI UNA CITA YA EXISTE
+========================================= */
+
+function citaYaExiste(
+    fecha,
+    hora,
+    especialistaSeleccionado
+) {
+
+    return citas.some(
+        function(cita) {
+
+            return (
+                cita.fecha === fecha &&
+                cita.hora === hora &&
+                cita.especialista ===
+                    especialistaSeleccionado
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
    VALIDAR FECHA Y HORA
 ========================================= */
 
@@ -1534,10 +1845,6 @@ function validarFechaHora() {
     }
 
 
-    const hoy =
-        obtenerFechaLocal();
-
-
     const fechaHora =
         new Date(
             fechaCita.value +
@@ -1550,17 +1857,14 @@ function validarFechaHora() {
         new Date();
 
 
-    /*
-     * FECHA/HORA PASADA
-     */
+    /* FECHA/HORA PASADA */
 
     if (
         fechaHora <= ahora
     ) {
 
         alertaHorario.textContent =
-            "❌ La fecha y hora seleccionadas " +
-            "ya han pasado.";
+            "❌ La fecha y hora seleccionadas ya han pasado.";
 
         alertaHorario.style.display =
             "block";
@@ -1570,9 +1874,7 @@ function validarFechaHora() {
     }
 
 
-    /*
-     * HORARIO
-     */
+    /* HORARIO */
 
     const partes =
         horaCita.value.split(":");
@@ -1604,8 +1906,7 @@ function validarFechaHora() {
     ) {
 
         alertaHorario.textContent =
-            "❌ El horario permitido es " +
-            "de 07:00 a 18:00.";
+            "❌ El horario permitido es de 07:00 a 18:00.";
 
         alertaHorario.style.display =
             "block";
@@ -1615,9 +1916,7 @@ function validarFechaHora() {
     }
 
 
-    /*
-     * INTERVALOS DE 30 MINUTOS
-     */
+    /* INTERVALOS */
 
     if (
         minutos !== 0 &&
@@ -1625,8 +1924,31 @@ function validarFechaHora() {
     ) {
 
         alertaHorario.textContent =
-            "❌ Las citas deben programarse " +
-            "en intervalos de 30 minutos.";
+            "❌ Las citas deben programarse en intervalos de 30 minutos.";
+
+        alertaHorario.style.display =
+            "block";
+
+        return false;
+
+    }
+
+
+    /* =====================================
+       CITA REPETIDA
+    ====================================== */
+
+    if (
+        especialista.value &&
+        citaYaExiste(
+            fechaCita.value,
+            horaCita.value,
+            especialista.value
+        )
+    ) {
+
+        alertaHorario.textContent =
+            "❌ Ese horario ya está ocupado para este especialista. Selecciona otra fecha u otra hora.";
 
         alertaHorario.style.display =
             "block";
@@ -1648,6 +1970,12 @@ fechaCita.addEventListener(
 
 
 horaCita.addEventListener(
+    "change",
+    validarFechaHora
+);
+
+
+especialista.addEventListener(
     "change",
     validarFechaHora
 );
@@ -1774,21 +2102,55 @@ function calcularPrioridad() {
 
 function generarFolio() {
 
-    const fecha =
-        new Date();
+    let folio;
 
-    const año =
-        fecha.getFullYear();
+    do {
 
+        const fecha =
+            new Date();
 
-    const numero =
-        Math.floor(
-            100000 +
-            Math.random() * 900000
-        );
+        const año =
+            fecha.getFullYear();
 
 
-    return `HOSP-${año}-${numero}`;
+        const numero =
+            Math.floor(
+                100000 +
+                Math.random() * 900000
+            );
+
+
+        folio =
+            `HOSP-${año}-${numero}`;
+
+    } while (
+        citas.some(
+            cita => cita.folio === folio
+        )
+    );
+
+
+    return folio;
+
+}
+
+
+/* =========================================
+   FORMATEAR FECHA
+========================================= */
+
+function formatearFecha(fecha) {
+
+    return new Date(
+        fecha + "T00:00:00"
+    ).toLocaleDateString(
+        "es-MX",
+        {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        }
+    );
 
 }
 
@@ -1804,9 +2166,7 @@ formulario.addEventListener(
         evento.preventDefault();
 
 
-        /*
-         * VALIDAR FECHA/HORA
-         */
+        /* VALIDAR FECHA/HORA */
 
         if (
             !validarFechaHora()
@@ -1817,9 +2177,7 @@ formulario.addEventListener(
         }
 
 
-        /*
-         * VALIDAR ESPECIALISTA
-         */
+        /* VALIDAR ESPECIALISTA */
 
         if (
             !especialista.value
@@ -1834,9 +2192,7 @@ formulario.addEventListener(
         }
 
 
-        /*
-         * VALIDAR EMBARAZO
-         */
+        /* VALIDAR EMBARAZO */
 
         const tipoPaciente =
             document.querySelector(
@@ -1869,10 +2225,7 @@ formulario.addEventListener(
         }
 
 
-        /*
-         * NO PERMITIR EMERGENCIA
-         * COMO CITA PROGRAMADA
-         */
+        /* NO PERMITIR EMERGENCIA */
 
         const urgencia =
             document.querySelector(
@@ -1887,8 +2240,7 @@ formulario.addEventListener(
         ) {
 
             alert(
-                "⚠️ Las emergencias deben " +
-                "atenderse directamente en urgencias."
+                "⚠️ Las emergencias deben atenderse directamente en urgencias."
             );
 
             return;
@@ -1896,9 +2248,34 @@ formulario.addEventListener(
         }
 
 
-        /*
-         * GENERAR INFORMACIÓN
-         */
+        /* =====================================
+           SEGUNDA COMPROBACIÓN DE CITA DUPLICADA
+           ===================================== */
+
+        if (
+            citaYaExiste(
+                fechaCita.value,
+                horaCita.value,
+                especialista.value
+            )
+        ) {
+
+            alertaHorario.textContent =
+                "❌ Esta cita ya existe. Debes seleccionar otra fecha u otro horario.";
+
+            alertaHorario.style.display =
+                "block";
+
+            fechaCita.focus();
+
+            return;
+
+        }
+
+
+        /* =====================================
+           GENERAR DATOS
+        ====================================== */
 
         const folio =
             generarFolio();
@@ -1908,9 +2285,83 @@ formulario.addEventListener(
             calcularPrioridad();
 
 
-        /*
-         * MOSTRAR CONFIRMACIÓN
-         */
+        const cita = {
+
+            folio: folio,
+
+            nombre:
+                document.getElementById(
+                    "nombre"
+                ).value.trim(),
+
+            fechaNacimiento:
+                fechaNacimiento.value,
+
+            edad:
+                edad.value,
+
+            telefono:
+                document.getElementById(
+                    "telefono"
+                ).value,
+
+            curp:
+                document.getElementById(
+                    "curp"
+                ).value,
+
+            especialidad:
+                especialidad.options[
+                    especialidad.selectedIndex
+                ].text,
+
+            especialidadCodigo:
+                especialidad.value,
+
+            especialista:
+                especialista.value,
+
+            motivo:
+                document.getElementById(
+                    "motivo"
+                ).value.trim(),
+
+            fecha:
+                fechaCita.value,
+
+            hora:
+                horaCita.value,
+
+            prioridad:
+                prioridad,
+
+            observaciones:
+                document.getElementById(
+                    "observaciones"
+                ).value.trim(),
+
+            fechaRegistro:
+                new Date().toISOString()
+
+        };
+
+
+        /* =====================================
+           GUARDAR CITA
+        ====================================== */
+
+        citas.push(cita);
+
+
+        localStorage.setItem(
+            "citasHospital",
+            JSON.stringify(citas)
+        );
+
+
+        /* =====================================
+           MOSTRAR CONFIRMACIÓN
+        ====================================== */
 
         document.getElementById(
             "folio"
@@ -1921,62 +2372,59 @@ formulario.addEventListener(
         document.getElementById(
             "rPaciente"
         ).textContent =
-            document.getElementById(
-                "nombre"
-            ).value;
+            cita.nombre;
 
 
         document.getElementById(
             "rEspecialidad"
         ).textContent =
-            especialidad.options[
-                especialidad.selectedIndex
-            ].text;
+            cita.especialidad;
 
 
         document.getElementById(
             "rEspecialista"
         ).textContent =
-            especialista.value;
+            cita.especialista;
 
 
         document.getElementById(
             "rFecha"
         ).textContent =
-            fechaCita.value;
+            formatearFecha(
+                cita.fecha
+            );
 
 
         document.getElementById(
             "rHora"
         ).textContent =
-            horaCita.value;
+            cita.hora;
 
 
         document.getElementById(
             "rPrioridad"
         ).textContent =
-            prioridad;
+            cita.prioridad;
 
 
-        /*
-         * OCULTAR FORMULARIO
-         */
+        /* OCULTAR FORMULARIO */
 
         formulario.style.display =
             "none";
 
 
-        /*
-         * MOSTRAR CONFIRMACIÓN
-         */
+        /* MOSTRAR CONFIRMACIÓN */
 
         exito.style.display =
             "block";
 
 
-        /*
-         * LLEVAR AL MENSAJE
-         */
+        /* ACTUALIZAR LISTA */
+
+        mostrarCitas();
+
+
+        /* SUBIR */
 
         exito.scrollIntoView({
             behavior: "smooth"
@@ -1984,6 +2432,204 @@ formulario.addEventListener(
 
     }
 );
+
+
+/* =========================================
+   MOSTRAR CITAS
+========================================= */
+
+function mostrarCitas() {
+
+    listaCitas.innerHTML = "";
+
+
+    if (citas.length === 0) {
+
+        listaCitas.innerHTML = `
+            <div class="sin-citas">
+                No hay citas registradas.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    /* ORDENAR POR FECHA Y HORA */
+
+    const citasOrdenadas =
+        [...citas].sort(
+            function(a, b) {
+
+                return (
+                    new Date(
+                        a.fecha +
+                        "T" +
+                        a.hora
+                    ) -
+                    new Date(
+                        b.fecha +
+                        "T" +
+                        b.hora
+                    )
+                );
+
+            }
+        );
+
+
+    citasOrdenadas.forEach(
+        function(cita) {
+
+            const tarjeta =
+                document.createElement(
+                    "div"
+                );
+
+
+            tarjeta.className =
+                "cita-card";
+
+
+            tarjeta.innerHTML = `
+
+                <h3>
+                    🏥 ${cita.especialidad}
+                </h3>
+
+                <p class="folio-card">
+                    Folio: ${cita.folio}
+                </p>
+
+                <p>
+                    <strong>Paciente:</strong>
+                    ${cita.nombre}
+                </p>
+
+                <p>
+                    <strong>Especialista:</strong>
+                    ${cita.especialista}
+                </p>
+
+                <p>
+                    <strong>Fecha:</strong>
+                    ${formatearFecha(cita.fecha)}
+                </p>
+
+                <p>
+                    <strong>Hora:</strong>
+                    ${cita.hora}
+                </p>
+
+                <p>
+                    <strong>Prioridad:</strong>
+                    ${cita.prioridad}
+                </p>
+
+                <button
+                    type="button"
+                    class="boton-cancelar"
+                    onclick="cancelarCita('${cita.folio}')"
+                >
+                    ❌ Cancelar cita
+                </button>
+
+            `;
+
+
+            listaCitas.appendChild(
+                tarjeta
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CANCELAR CITA
+========================================= */
+
+function cancelarCita(folio) {
+
+    const cita =
+        citas.find(
+            function(item) {
+
+                return item.folio === folio;
+
+            }
+        );
+
+
+    if (!cita) {
+
+        alert(
+            "No se encontró la cita."
+        );
+
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+            "¿Estás seguro de que deseas cancelar esta cita?\n\n" +
+
+            "Folio: " +
+            cita.folio +
+
+            "\nPaciente: " +
+            cita.nombre +
+
+            "\nFecha: " +
+            formatearFecha(cita.fecha) +
+
+            "\nHora: " +
+            cita.hora
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    /* ELIMINAR CITA */
+
+    citas =
+        citas.filter(
+            function(item) {
+
+                return item.folio !== folio;
+
+            }
+        );
+
+
+    /* GUARDAR CAMBIOS */
+
+    localStorage.setItem(
+        "citasHospital",
+        JSON.stringify(citas)
+    );
+
+
+    /* ACTUALIZAR */
+
+    mostrarCitas();
+
+
+    alert(
+        "✅ La cita fue cancelada correctamente."
+    );
+
+}
 
 
 /* =========================================
@@ -1996,40 +2642,19 @@ document.getElementById(
     "click",
     function() {
 
-
-        /*
-         * REINICIAR TODO EL FORMULARIO
-         */
-
         formulario.reset();
 
 
-        /*
-         * LIMPIAR EDAD
-         */
-
         edad.value = "";
 
-
-        /*
-         * REINICIAR ESPECIALISTA
-         */
 
         especialista.innerHTML =
             '<option value="">Seleccione especialidad...</option>';
 
 
-        /*
-         * OCULTAR EMBARAZO
-         */
-
         datosEmbarazo.style.display =
             "none";
 
-
-        /*
-         * OCULTAR ALERTAS
-         */
 
         alertaHorario.style.display =
             "none";
@@ -2039,33 +2664,16 @@ document.getElementById(
             "none";
 
 
-        /*
-         * OCULTAR RESULTADO
-         */
-
         exito.style.display =
             "none";
 
-
-        /*
-         * MOSTRAR FORMULARIO
-         */
 
         formulario.style.display =
             "block";
 
 
-        /*
-         * VOLVER A APLICAR
-         * RESTRICCIÓN DE FECHA
-         */
-
         aplicarRestriccionesFecha();
 
-
-        /*
-         * SUBIR AL FORMULARIO
-         */
 
         window.scrollTo({
 
@@ -2077,6 +2685,14 @@ document.getElementById(
 
     }
 );
+
+
+/* =========================================
+   MOSTRAR CITAS AL CARGAR
+========================================= */
+
+mostrarCitas();
+
 
 </script>
 
