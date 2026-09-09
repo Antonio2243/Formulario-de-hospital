@@ -1,162 +1,2426 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego del Ahorcado</title>
- 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
- 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #eef2f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
- 
-        .juego {
-            background: white;
-            width: 90%;
-            max-width: 800px;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            text-align: center;
-        }
- 
-        h1 {
-            color: #263238;
-            margin-top: 0;
-        }
- 
-        .contenido {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
- 
-        canvas {
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            background: #fafafa;
-        }
- 
-        #palabra {
-            font-size: 35px;
-            letter-spacing: 10px;
-            margin: 25px 0;
-            color: #222;
-            min-height: 50px;
-        }
- 
-        .info {
-            min-width: 280px;
-        }
- 
-        #letra {
-            width: 70px;
-            height: 45px;
-            font-size: 25px;
-            text-align: center;
-            text-transform: uppercase;
-            border: 2px solid #555;
-            border-radius: 8px;
-        }
- 
-        button {
-            padding: 12px 20px;
-            margin: 8px;
-            border: none;
-            border-radius: 8px;
-            background: #1976d2;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
- 
-        button:hover {
-            background: #0d47a1;
-        }
- 
-        #mensaje {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 20px;
-        }
- 
-        #letrasUsadas {
-            color: #555;
-            margin-top: 15px;
-        }
- 
-        .ganaste {
-            color: green;
-        }
- 
-        .perdiste {
-            color: red;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hospital San Miguel - Sistema de Citas</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef5f7;
+    color: #333;
+}
+
+/* ==============================
+   ENCABEZADO
+============================== */
+
+header {
+    background: #087f8c;
+    color: white;
+    text-align: center;
+    padding: 28px;
+}
+
+header h1 {
+    margin: 0 0 8px;
+}
+
+header p {
+    margin: 0;
+}
+
+/* ==============================
+   CONTENEDOR
+============================== */
+
+.contenedor {
+    width: 95%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+/* ==============================
+   APARTADOS
+============================== */
+
+.apartado {
+    background: white;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.10);
+}
+
+.apartado h2 {
+    color: #087f8c;
+    margin-top: 0;
+    border-bottom: 2px solid #087f8c;
+    padding-bottom: 12px;
+}
+
+/* ==============================
+   FORMULARIOS
+============================== */
+
+.fila {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.fila-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.obligatorio {
+    color: red;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #087f8c;
+    box-shadow: 0 0 5px rgba(8,127,140,.20);
+}
+
+/* ==============================
+   BOTONES
+============================== */
+
+button {
+    font-family: inherit;
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.btn-principal {
+    background: #087f8c;
+    color: white;
+}
+
+.btn-principal:hover {
+    background: #056772;
+}
+
+.btn-cancelar {
+    background: #d90429;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background: #b00320;
+}
+
+.btn-nueva {
+    background: #16803c;
+    color: white;
+}
+
+.btn-nueva:hover {
+    background: #126b31;
+}
+
+/* ==============================
+   INFORMACIÓN
+============================== */
+
+.info {
+    background: #e8f7fa;
+    border-left: 4px solid #087f8c;
+    padding: 14px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.correcto {
+    background: #d8f3dc;
+    border-left: 4px solid #16803c;
+    padding: 14px;
+    color: #1b4332;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
+.advertencia {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 14px;
+    color: #664d03;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
+.error {
+    display: none;
+    color: #d90429;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+/* ==============================
+   HORARIOS
+============================== */
+
+.horarios {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.horario {
+    padding: 12px 5px;
+    background: white;
+    color: #087f8c;
+    border: 2px solid #087f8c;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.horario:hover {
+    background: #e6f7f9;
+}
+
+.horario.seleccionado {
+    background: #087f8c;
+    color: white;
+}
+
+.horario.ocupado {
+    background: #e0e0e0;
+    color: #777;
+    border-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* ==============================
+   RESULTADOS
+============================== */
+
+.resultado {
+    margin-top: 20px;
+}
+
+.cita {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-left: 5px solid #087f8c;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.cita h3 {
+    color: #087f8c;
+    margin-top: 0;
+}
+
+.dato {
+    margin: 8px 0;
+}
+
+/* ==============================
+   CONFIRMACIÓN
+============================== */
+
+.confirmacion {
+    display: none;
+    background: #d8f3dc;
+    border: 1px solid #74c69d;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.confirmacion h3 {
+    color: #16803c;
+    margin-top: 0;
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #777;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 750px) {
+
+    .fila,
+    .fila-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .horarios {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .apartado {
+        padding: 20px;
+    }
+}
+
+</style>
 </head>
- 
+
+
 <body>
- 
-    <div class="juego">
- 
-        <h1>🎮 Juego del Ahorcado</h1>
- 
-        <div class="contenido">
- 
-            <canvas id="canvas" width="300" height="300"></canvas>
- 
-            <div class="info">
- 
-                <p>Adivina la palabra:</p>
- 
-                <div id="palabra"></div>
- 
+
+
+<header>
+
+    <h1>Hospital San Miguel</h1>
+
+    <p>
+        Sistema de gestión de citas médicas
+    </p>
+
+</header>
+
+
+<div class="contenedor">
+
+
+<!-- =====================================================
+     APARTADO 1
+     GENERAR CITA
+===================================================== -->
+
+<section class="apartado">
+
+    <h2>1. Generar una cita</h2>
+
+    <form id="formCita">
+
+
+        <!-- CURP -->
+
+        <div class="campo">
+
+            <label for="curp">
+
+                CURP
+                <span class="obligatorio">*</span>
+
+            </label>
+
+            <input
+                type="text"
+                id="curp"
+                maxlength="18"
+                placeholder="Escribe la CURP manualmente"
+                autocomplete="off"
+                required
+            >
+
+            <div id="mensajeCurp"></div>
+
+        </div>
+
+
+        <!-- DATOS DEL PACIENTE -->
+
+        <div class="fila">
+
+            <div class="campo">
+
+                <label for="nombre">
+
+                    Nombre(s)
+                    <span class="obligatorio">*</span>
+
+                </label>
+
                 <input
                     type="text"
-                    id="letra"
-                    maxlength="1"
-                    autocomplete="off"
+                    id="nombre"
+                    required
                 >
- 
-                <br>
- 
-                <button onclick="adivinarLetra()">
-                    Adivinar letra
-                </button>
- 
-                <button onclick="nuevoJuego()">
-                    Nuevo juego
-                </button>
- 
-                <p id="letrasUsadas">
-                    Letras usadas: ninguna
-                </p>
- 
-                <p id="errores">
-                    Errores: 0 / 6
-                </p>
- 
-                <div id="mensaje"></div>
- 
+
+                <div
+                    id="errorNombre"
+                    class="error"
+                >
+                    El nombre solo debe contener letras
+                    y espacios.
+                </div>
+
             </div>
- 
+
+
+            <div class="campo">
+
+                <label for="apellidos">
+
+                    Apellidos
+                    <span class="obligatorio">*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    id="apellidos"
+                    required
+                >
+
+            </div>
+
         </div>
- 
+
+
+        <div class="fila-3">
+
+
+            <div class="campo">
+
+                <label for="fechaNacimiento">
+
+                    Fecha de nacimiento
+                    <span class="obligatorio">*</span>
+
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaNacimiento"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="sexo">
+
+                    Sexo
+                    <span class="obligatorio">*</span>
+
+                </label>
+
+                <select id="sexo" required>
+
+                    <option value="">
+                        Selecciona
+                    </option>
+
+                    <option value="Femenino">
+                        Femenino
+                    </option>
+
+                    <option value="Masculino">
+                        Masculino
+                    </option>
+
+                    <option value="Otro">
+                        Otro
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="telefono">
+
+                    Teléfono
+                    <span class="obligatorio">*</span>
+
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefono"
+                    maxlength="10"
+                    placeholder="10 dígitos"
+                    required
+                >
+
+                <div
+                    id="errorTelefono"
+                    class="error"
+                >
+                    El teléfono debe contener
+                    exactamente 10 dígitos.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="fila">
+
+
+            <div class="campo">
+
+                <label for="correo">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="correo"
+                    placeholder="correo@ejemplo.com"
+                >
+
+                <div
+                    id="errorCorreo"
+                    class="error"
+                >
+                    El correo no tiene un formato válido.
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="direccion">
+                    Dirección
+                </label>
+
+                <input
+                    type="text"
+                    id="direccion"
+                    placeholder="Dirección"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMACIÓN DE CITA -->
+
+        <h2>Información de la cita</h2>
+
+
+        <div class="fila">
+
+
+            <div class="campo">
+
+                <label for="especialidad">
+
+                    Especialidad
+                    <span class="obligatorio">*</span>
+
+                </label>
+
+                <select
+                    id="especialidad"
+                    required
+                >
+
+                    <option value="">
+                        Selecciona una especialidad
+                    </option>
+
+                    <option value="medicina_general">
+                        Medicina General
+                    </option>
+
+                    <option value="cardiologia">
+                        Cardiología
+                    </option>
+
+                    <option value="pediatria">
+                        Pediatría
+                    </option>
+
+                    <option value="dermatologia">
+                        Dermatología
+                    </option>
+
+                    <option value="ginecologia">
+                        Ginecología
+                    </option>
+
+                    <option value="traumatologia">
+                        Traumatología
+                    </option>
+
+                    <option value="odontologia">
+                        Odontología
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="medico">
+
+                    Médico
+                    <span class="obligatorio">*</span>
+
+                </label>
+
+                <select
+                    id="medico"
+                    required
+                >
+
+                    <option value="">
+                        Selecciona una especialidad primero
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- FECHA -->
+
+        <div class="campo">
+
+            <label for="fecha">
+
+                Fecha de la cita
+                <span class="obligatorio">*</span>
+
+            </label>
+
+            <input
+                type="date"
+                id="fecha"
+                required
+            >
+
+            <div class="info">
+
+                La fecha mínima se establece
+                automáticamente con la fecha actual.
+                No se permiten fechas pasadas.
+
+            </div>
+
+            <div
+                id="errorFecha"
+                class="error"
+            >
+                Selecciona una fecha válida.
+            </div>
+
+        </div>
+
+
+        <!-- HORARIOS -->
+
+        <div class="campo">
+
+            <label>
+
+                Horario
+                <span class="obligatorio">*</span>
+
+            </label>
+
+            <div
+                id="horarios"
+                class="horarios"
+            >
+
+                <div class="info">
+
+                    Selecciona especialidad,
+                    médico y fecha.
+
+                </div>
+
+            </div>
+
+            <input
+                type="hidden"
+                id="hora"
+            >
+
+            <div
+                id="errorHora"
+                class="error"
+            >
+                Debes seleccionar un horario disponible.
+            </div>
+
+        </div>
+
+
+        <!-- MOTIVO -->
+
+        <div class="campo">
+
+            <label for="motivo">
+
+                Motivo de la consulta
+
+            </label>
+
+            <input
+                type="text"
+                id="motivo"
+                maxlength="200"
+                placeholder="Motivo de la consulta"
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn btn-principal"
+        >
+
+            Generar cita
+
+        </button>
+
+
+    </form>
+
+
+    <!-- CONFIRMACIÓN -->
+
+    <div
+        id="confirmacion"
+        class="confirmacion"
+    >
+
+        <h3>
+            ✓ Cita generada correctamente
+        </h3>
+
+        <div id="datosConfirmacion"></div>
+
     </div>
- 
-    <script src="juego.js"></script>
- 
+
+</section>
+
+
+<!-- =====================================================
+     APARTADO 2
+     CONSULTAR CITA
+===================================================== -->
+
+<section class="apartado">
+
+    <h2>2. Consultar cita</h2>
+
+    <div class="info">
+
+        Escribe la CURP del paciente para consultar
+        sus citas activas.
+
+    </div>
+
+
+    <div class="campo">
+
+        <label for="curpConsulta">
+
+            CURP
+
+        </label>
+
+        <input
+            type="text"
+            id="curpConsulta"
+            maxlength="18"
+            placeholder="Escribe la CURP"
+        >
+
+    </div>
+
+
+    <button
+        type="button"
+        id="btnConsultar"
+        class="btn btn-principal"
+    >
+
+        Consultar cita
+
+    </button>
+
+
+    <div
+        id="resultadoConsulta"
+        class="resultado"
+    ></div>
+
+</section>
+
+
+<!-- =====================================================
+     APARTADO 3
+     CANCELAR CITA
+===================================================== -->
+
+<section class="apartado">
+
+    <h2>3. Cancelar cita</h2>
+
+    <div class="info">
+
+        Introduce el número de cita para
+        cancelar una cita existente.
+
+    </div>
+
+
+    <div class="campo">
+
+        <label for="numeroCancelar">
+
+            Número de cita
+
+        </label>
+
+        <input
+            type="text"
+            id="numeroCancelar"
+            placeholder="Ejemplo: CITA-2026-12345"
+        >
+
+    </div>
+
+
+    <button
+        type="button"
+        id="btnCancelar"
+        class="btn btn-cancelar"
+    >
+
+        Cancelar cita
+
+    </button>
+
+
+    <div
+        id="resultadoCancelacion"
+        class="resultado"
+    ></div>
+
+
+    <!-- BOTÓN PARA NUEVA CITA -->
+
+    <button
+        type="button"
+        id="btnNuevaCita"
+        class="btn btn-nueva"
+        style="display:none;"
+    >
+
+        Generar una nueva cita
+
+    </button>
+
+</section>
+
+
+</div>
+
+
+<footer>
+
+    Hospital San Miguel © 2026
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   PACIENTES
+===================================================== */
+
+const pacientes = {
+
+    "GARC850101HDFRRL09": {
+
+        nombre: "Juan Carlos",
+        apellidos: "García Ramírez",
+        fechaNacimiento: "1985-01-01",
+        sexo: "Masculino",
+        telefono: "8341234567",
+        correo: "juan.garcia@gmail.com",
+        direccion: "Calle Hidalgo #123"
+
+    },
+
+    "LOPM920315MDFPRL08": {
+
+        nombre: "María Fernanda",
+        apellidos: "López Pérez",
+        fechaNacimiento: "1992-03-15",
+        sexo: "Femenino",
+        telefono: "8349876543",
+        correo: "maria.lopez@gmail.com",
+        direccion: "Avenida Central #456"
+
+    },
+
+    "ROJM780720HDFDRN05": {
+
+        nombre: "José Manuel",
+        apellidos: "Rodríguez Martínez",
+        fechaNacimiento: "1978-07-20",
+        sexo: "Masculino",
+        telefono: "8345557788",
+        correo: "jose.rodriguez@gmail.com",
+        direccion: "Calle Morelos #789"
+
+    }
+
+};
+
+
+/* =====================================================
+   MÉDICOS
+===================================================== */
+
+const medicos = {
+
+    medicina_general: [
+
+        {
+            id: "MG01",
+            nombre: "Dra. Laura Martínez"
+        },
+
+        {
+            id: "MG02",
+            nombre: "Dr. Carlos Hernández"
+        }
+
+    ],
+
+    cardiologia: [
+
+        {
+            id: "CA01",
+            nombre: "Dr. Roberto Sánchez"
+        },
+
+        {
+            id: "CA02",
+            nombre: "Dra. Elena Torres"
+        }
+
+    ],
+
+    pediatria: [
+
+        {
+            id: "PE01",
+            nombre: "Dra. Ana González"
+        }
+
+    ],
+
+    dermatologia: [
+
+        {
+            id: "DE01",
+            nombre: "Dr. Miguel Ramírez"
+        }
+
+    ],
+
+    ginecologia: [
+
+        {
+            id: "GI01",
+            nombre: "Dra. Patricia López"
+        }
+
+    ],
+
+    traumatologia: [
+
+        {
+            id: "TR01",
+            nombre: "Dr. Fernando Ruiz"
+        }
+
+    ],
+
+    odontologia: [
+
+        {
+            id: "OD01",
+            nombre: "Dra. Sofía Morales"
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   CITAS EXISTENTES
+===================================================== */
+
+let citas = [
+
+    {
+        id: "CITA-2026-10001",
+        curp: "GARC850101HDFRRL09",
+        paciente: "Juan Carlos García Ramírez",
+        especialidad: "cardiologia",
+        medico: "CA01",
+        fecha: "2026-09-15",
+        hora: "09:00",
+        motivo: "Dolor en el pecho",
+        estado: "activa"
+    },
+
+    {
+        id: "CITA-2026-10002",
+        curp: "LOPM920315MDFPRL08",
+        paciente: "María Fernanda López Pérez",
+        especialidad: "pediatria",
+        medico: "PE01",
+        fecha: "2026-09-15",
+        hora: "11:00",
+        motivo: "Consulta general",
+        estado: "activa"
+    },
+
+    {
+        id: "CITA-2026-10003",
+        curp: "ROJM780720HDFDRN05",
+        paciente: "José Manuel Rodríguez Martínez",
+        especialidad: "medicina_general",
+        medico: "MG01",
+        fecha: "2026-09-20",
+        hora: "10:00",
+        motivo: "Revisión médica",
+        estado: "activa"
+    }
+
+];
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const curp =
+    document.getElementById("curp");
+
+const nombre =
+    document.getElementById("nombre");
+
+const apellidos =
+    document.getElementById("apellidos");
+
+const fechaNacimiento =
+    document.getElementById("fechaNacimiento");
+
+const sexo =
+    document.getElementById("sexo");
+
+const telefono =
+    document.getElementById("telefono");
+
+const correo =
+    document.getElementById("correo");
+
+const direccion =
+    document.getElementById("direccion");
+
+const especialidad =
+    document.getElementById("especialidad");
+
+const medico =
+    document.getElementById("medico");
+
+const fecha =
+    document.getElementById("fecha");
+
+const hora =
+    document.getElementById("hora");
+
+const horarios =
+    document.getElementById("horarios");
+
+
+/* =====================================================
+   FECHA ACTUAL
+===================================================== */
+
+function obtenerFechaActual() {
+
+    const hoy = new Date();
+
+    const año =
+        hoy.getFullYear();
+
+    const mes =
+        String(
+            hoy.getMonth() + 1
+        ).padStart(2, "0");
+
+    const dia =
+        String(
+            hoy.getDate()
+        ).padStart(2, "0");
+
+    return `${año}-${mes}-${dia}`;
+}
+
+
+const fechaActual =
+    obtenerFechaActual();
+
+fecha.min =
+    fechaActual;
+
+
+/* =====================================================
+   CURP MANUAL Y AUTOCOMPLETADO
+===================================================== */
+
+curp.addEventListener(
+    "input",
+    function() {
+
+        curp.value =
+            curp.value
+                .toUpperCase()
+                .replace(
+                    /[^A-Z0-9]/g,
+                    ""
+                );
+
+        const valor =
+            curp.value.trim();
+
+        if (valor.length < 18) {
+
+            limpiarDatosPaciente();
+
+            document.getElementById(
+                "mensajeCurp"
+            ).innerHTML = "";
+
+            return;
+        }
+
+
+        const paciente =
+            pacientes[valor];
+
+
+        if (paciente) {
+
+            nombre.value =
+                paciente.nombre;
+
+            apellidos.value =
+                paciente.apellidos;
+
+            fechaNacimiento.value =
+                paciente.fechaNacimiento;
+
+            sexo.value =
+                paciente.sexo;
+
+            telefono.value =
+                paciente.telefono;
+
+            correo.value =
+                paciente.correo;
+
+            direccion.value =
+                paciente.direccion;
+
+
+            document.getElementById(
+                "mensajeCurp"
+            ).innerHTML = `
+
+                <div class="correcto">
+
+                    ✓ Paciente encontrado.
+                    Los datos fueron cargados
+                    automáticamente.
+
+                </div>
+
+            `;
+
+        } else {
+
+            limpiarDatosPaciente();
+
+            document.getElementById(
+                "mensajeCurp"
+            ).innerHTML = `
+
+                <div class="advertencia">
+
+                    CURP no encontrada.
+                    Puedes introducir los datos
+                    manualmente.
+
+                </div>
+
+            `;
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LIMPIAR DATOS
+===================================================== */
+
+function limpiarDatosPaciente() {
+
+    nombre.value = "";
+    apellidos.value = "";
+    fechaNacimiento.value = "";
+    sexo.value = "";
+    telefono.value = "";
+    correo.value = "";
+    direccion.value = "";
+
+}
+
+
+/* =====================================================
+   ESPECIALIDAD
+===================================================== */
+
+especialidad.addEventListener(
+    "change",
+    function() {
+
+        medico.innerHTML = `
+            <option value="">
+                Selecciona un médico
+            </option>
+        `;
+
+        const lista =
+            medicos[
+                especialidad.value
+            ];
+
+        if (!lista) {
+
+            actualizarHorarios();
+
+            return;
+        }
+
+
+        lista.forEach(
+            function(doctor) {
+
+                const opcion =
+                    document.createElement(
+                        "option"
+                    );
+
+                opcion.value =
+                    doctor.id;
+
+                opcion.textContent =
+                    doctor.nombre;
+
+                medico.appendChild(
+                    opcion
+                );
+
+            }
+        );
+
+
+        actualizarHorarios();
+
+    }
+);
+
+
+/* =====================================================
+   MÉDICO
+===================================================== */
+
+medico.addEventListener(
+    "change",
+    actualizarHorarios
+);
+
+
+/* =====================================================
+   FECHA
+===================================================== */
+
+fecha.addEventListener(
+    "change",
+    function() {
+
+        if (
+            fecha.value < fechaActual
+        ) {
+
+            document.getElementById(
+                "errorFecha"
+            ).style.display = "block";
+
+            fecha.value = "";
+
+            hora.value = "";
+
+            actualizarHorarios();
+
+            return;
+        }
+
+
+        document.getElementById(
+            "errorFecha"
+        ).style.display = "none";
+
+        actualizarHorarios();
+
+    }
+);
+
+
+/* =====================================================
+   HORARIOS DISPONIBLES
+===================================================== */
+
+const horariosDisponibles = [
+
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "16:00",
+    "17:00",
+    "18:00"
+
+];
+
+
+/* =====================================================
+   ACTUALIZAR HORARIOS
+===================================================== */
+
+function actualizarHorarios() {
+
+    horarios.innerHTML = "";
+
+    hora.value = "";
+
+
+    if (
+
+        !fecha.value ||
+        !especialidad.value ||
+        !medico.value
+
+    ) {
+
+        horarios.innerHTML = `
+
+            <div class="info">
+
+                Selecciona especialidad,
+                médico y fecha para mostrar
+                los horarios disponibles.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    horariosDisponibles.forEach(
+        function(horaDisponible) {
+
+            const boton =
+                document.createElement(
+                    "button"
+                );
+
+            boton.type =
+                "button";
+
+            boton.className =
+                "horario";
+
+            boton.textContent =
+                horaDisponible;
+
+
+            /*
+                Solo las citas activas
+                bloquean el horario.
+            */
+
+            const ocupado =
+                citas.some(
+                    function(cita) {
+
+                        return (
+
+                            cita.estado === "activa" &&
+
+                            cita.fecha === fecha.value &&
+
+                            cita.hora === horaDisponible &&
+
+                            cita.medico === medico.value
+
+                        );
+
+                    }
+                );
+
+
+            if (ocupado) {
+
+                boton.disabled = true;
+
+                boton.classList.add(
+                    "ocupado"
+                );
+
+                boton.innerHTML = `
+
+                    ${horaDisponible}
+
+                    <br>
+
+                    <small>
+                        Ocupado
+                    </small>
+
+                `;
+
+            } else {
+
+                boton.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .querySelectorAll(
+                                ".horario"
+                            )
+                            .forEach(
+                                function(boton) {
+
+                                    boton.classList
+                                        .remove(
+                                            "seleccionado"
+                                        );
+
+                                }
+                            );
+
+
+                        boton.classList.add(
+                            "seleccionado"
+                        );
+
+
+                        hora.value =
+                            horaDisponible;
+
+                    }
+                );
+
+            }
+
+
+            horarios.appendChild(
+                boton
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   VALIDACIONES
+===================================================== */
+
+function validarCURP() {
+
+    return /^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[A-Z0-9][0-9]$/
+        .test(
+            curp.value.trim()
+        );
+
+}
+
+
+function validarNombre() {
+
+    return /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+$/
+        .test(
+            nombre.value.trim()
+        );
+
+}
+
+
+function validarTelefono() {
+
+    return /^[0-9]{10}$/
+        .test(
+            telefono.value.trim()
+        );
+
+}
+
+
+/* =====================================================
+   GENERAR CITA
+===================================================== */
+
+document
+    .getElementById("formCita")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            let valido = true;
+
+
+            if (!validarCURP()) {
+
+                alert(
+                    "La CURP debe tener un formato válido de 18 caracteres."
+                );
+
+                valido = false;
+            }
+
+
+            if (!validarNombre()) {
+
+                document.getElementById(
+                    "errorNombre"
+                ).style.display = "block";
+
+                valido = false;
+
+            } else {
+
+                document.getElementById(
+                    "errorNombre"
+                ).style.display = "none";
+
+            }
+
+
+            if (!validarTelefono()) {
+
+                document.getElementById(
+                    "errorTelefono"
+                ).style.display = "block";
+
+                valido = false;
+
+            } else {
+
+                document.getElementById(
+                    "errorTelefono"
+                ).style.display = "none";
+
+            }
+
+
+            if (
+                correo.value &&
+                !correo.validity.valid
+            ) {
+
+                document.getElementById(
+                    "errorCorreo"
+                ).style.display = "block";
+
+                valido = false;
+
+            } else {
+
+                document.getElementById(
+                    "errorCorreo"
+                ).style.display = "none";
+
+            }
+
+
+            if (
+                !medicos[
+                    especialidad.value
+                ]
+            ) {
+
+                alert(
+                    "Selecciona una especialidad válida."
+                );
+
+                valido = false;
+            }
+
+
+            if (!medico.value) {
+
+                alert(
+                    "Selecciona un médico."
+                );
+
+                valido = false;
+            }
+
+
+            if (
+                !fecha.value ||
+                fecha.value < fechaActual
+            ) {
+
+                document.getElementById(
+                    "errorFecha"
+                ).style.display = "block";
+
+                valido = false;
+
+            } else {
+
+                document.getElementById(
+                    "errorFecha"
+                ).style.display = "none";
+
+            }
+
+
+            if (!hora.value) {
+
+                document.getElementById(
+                    "errorHora"
+                ).style.display = "block";
+
+                valido = false;
+
+            } else {
+
+                document.getElementById(
+                    "errorHora"
+                ).style.display = "none";
+
+            }
+
+
+            if (!valido) {
+                return;
+            }
+
+
+            /* DOBLE RESERVA DEL PACIENTE */
+
+            const dobleReserva =
+                citas.some(
+                    function(cita) {
+
+                        return (
+
+                            cita.estado === "activa" &&
+
+                            cita.curp ===
+                                curp.value.trim() &&
+
+                            cita.fecha ===
+                                fecha.value &&
+
+                            cita.hora ===
+                                hora.value
+
+                        );
+
+                    }
+                );
+
+
+            if (dobleReserva) {
+
+                alert(
+                    "No puedes tener dos citas en la misma fecha y horario."
+                );
+
+                return;
+            }
+
+
+            /* HORARIO DEL MÉDICO */
+
+            const horarioOcupado =
+                citas.some(
+                    function(cita) {
+
+                        return (
+
+                            cita.estado === "activa" &&
+
+                            cita.fecha ===
+                                fecha.value &&
+
+                            cita.hora ===
+                                hora.value &&
+
+                            cita.medico ===
+                                medico.value
+
+                        );
+
+                    }
+                );
+
+
+            if (horarioOcupado) {
+
+                alert(
+                    "El horario seleccionado ya está ocupado."
+                );
+
+                actualizarHorarios();
+
+                return;
+            }
+
+
+            /* MÉDICO */
+
+            const doctor =
+                medicos[
+                    especialidad.value
+                ].find(
+                    function(d) {
+
+                        return (
+                            d.id ===
+                            medico.value
+                        );
+
+                    }
+                );
+
+
+            /* NÚMERO DE CITA */
+
+            const numeroCita =
+                "CITA-" +
+                new Date().getFullYear() +
+                "-" +
+                Math.floor(
+                    10000 +
+                    Math.random() * 90000
+                );
+
+
+            const pacienteNombre =
+                nombre.value.trim() +
+                " " +
+                apellidos.value.trim();
+
+
+            /* CREAR CITA */
+
+            const nuevaCita = {
+
+                id:
+                    numeroCita,
+
+                curp:
+                    curp.value.trim(),
+
+                paciente:
+                    pacienteNombre,
+
+                especialidad:
+                    especialidad.value,
+
+                medico:
+                    medico.value,
+
+                fecha:
+                    fecha.value,
+
+                hora:
+                    hora.value,
+
+                motivo:
+                    document.getElementById(
+                        "motivo"
+                    ).value,
+
+                estado:
+                    "activa"
+
+            };
+
+
+            citas.push(
+                nuevaCita
+            );
+
+
+            const nombreEspecialidad =
+                especialidad
+                    .options[
+                        especialidad.selectedIndex
+                    ]
+                    .text;
+
+
+            /* CONFIRMACIÓN */
+
+            document.getElementById(
+                "datosConfirmacion"
+            ).innerHTML = `
+
+                <div class="dato">
+                    <strong>
+                        Número de cita:
+                    </strong>
+
+                    ${numeroCita}
+                </div>
+
+                <div class="dato">
+                    <strong>
+                        Paciente:
+                    </strong>
+
+                    ${pacienteNombre}
+                </div>
+
+                <div class="dato">
+                    <strong>
+                        CURP:
+                    </strong>
+
+                    ${curp.value}
+                </div>
+
+                <div class="dato">
+                    <strong>
+                        Especialidad:
+                    </strong>
+
+                    ${nombreEspecialidad}
+                </div>
+
+                <div class="dato">
+                    <strong>
+                        Médico:
+                    </strong>
+
+                    ${doctor.nombre}
+                </div>
+
+                <div class="dato">
+                    <strong>
+                        Fecha:
+                    </strong>
+
+                    ${formatearFecha(
+                        fecha.value
+                    )}
+                </div>
+
+                <div class="dato">
+                    <strong>
+                        Hora:
+                    </strong>
+
+                    ${hora.value}
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "confirmacion"
+            ).style.display =
+                "block";
+
+
+            actualizarHorarios();
+
+
+            document.getElementById(
+                "confirmacion"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+
+/* =====================================================
+   CONSULTAR CITA
+===================================================== */
+
+document
+    .getElementById("btnConsultar")
+    .addEventListener(
+        "click",
+        consultarCita
+    );
+
+
+function consultarCita() {
+
+    const curpConsulta =
+        document.getElementById(
+            "curpConsulta"
+        ).value
+        .trim()
+        .toUpperCase();
+
+
+    const resultado =
+        document.getElementById(
+            "resultadoConsulta"
+        );
+
+
+    resultado.innerHTML = "";
+
+
+    if (!curpConsulta) {
+
+        resultado.innerHTML = `
+
+            <div class="advertencia">
+
+                Escribe una CURP para consultar.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    const citasPaciente =
+        citas.filter(
+            function(cita) {
+
+                return (
+
+                    cita.curp ===
+                        curpConsulta &&
+
+                    cita.estado ===
+                        "activa"
+
+                );
+
+            }
+        );
+
+
+    if (citasPaciente.length === 0) {
+
+        resultado.innerHTML = `
+
+            <div class="advertencia">
+
+                No existen citas activas
+                para esta CURP.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    citasPaciente.forEach(
+        function(cita) {
+
+            const doctor =
+                medicos[
+                    cita.especialidad
+                ].find(
+                    function(d) {
+
+                        return (
+                            d.id ===
+                            cita.medico
+                        );
+
+                    }
+                );
+
+
+            resultado.innerHTML += `
+
+                <div class="cita">
+
+                    <h3>
+                        Cita ${cita.id}
+                    </h3>
+
+                    <div class="dato">
+
+                        <strong>
+                            Paciente:
+                        </strong>
+
+                        ${cita.paciente}
+
+                    </div>
+
+                    <div class="dato">
+
+                        <strong>
+                            Especialidad:
+                        </strong>
+
+                        ${obtenerEspecialidad(
+                            cita.especialidad
+                        )}
+
+                    </div>
+
+                    <div class="dato">
+
+                        <strong>
+                            Médico:
+                        </strong>
+
+                        ${doctor ?
+                            doctor.nombre :
+                            "No disponible"}
+
+                    </div>
+
+                    <div class="dato">
+
+                        <strong>
+                            Fecha:
+                        </strong>
+
+                        ${formatearFecha(
+                            cita.fecha
+                        )}
+
+                    </div>
+
+                    <div class="dato">
+
+                        <strong>
+                            Hora:
+                        </strong>
+
+                        ${cita.hora}
+
+                    </div>
+
+                    <div class="dato">
+
+                        <strong>
+                            Motivo:
+                        </strong>
+
+                        ${
+                            cita.motivo ||
+                            "No especificado"
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CANCELAR CITA
+===================================================== */
+
+document
+    .getElementById("btnCancelar")
+    .addEventListener(
+        "click",
+        cancelarDesdeFormulario
+    );
+
+
+function cancelarDesdeFormulario() {
+
+    const numero =
+        document.getElementById(
+            "numeroCancelar"
+        ).value
+        .trim()
+        .toUpperCase();
+
+
+    const resultado =
+        document.getElementById(
+            "resultadoCancelacion"
+        );
+
+
+    resultado.innerHTML = "";
+
+
+    if (!numero) {
+
+        resultado.innerHTML = `
+
+            <div class="advertencia">
+
+                Escribe el número de la cita.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    const cita =
+        citas.find(
+            function(c) {
+
+                return (
+                    c.id === numero &&
+                    c.estado === "activa"
+                );
+
+            }
+        );
+
+
+    if (!cita) {
+
+        resultado.innerHTML = `
+
+            <div class="advertencia">
+
+                No se encontró una cita activa
+                con ese número.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+
+            "¿Deseas cancelar esta cita?\n\n" +
+
+            "Número: " +
+            cita.id +
+
+            "\nPaciente: " +
+            cita.paciente +
+
+            "\nFecha: " +
+            formatearFecha(
+                cita.fecha
+            ) +
+
+            "\nHora: " +
+            cita.hora
+
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    /* CAMBIAR ESTADO */
+
+    cita.estado =
+        "cancelada";
+
+
+    /* ACTUALIZAR HORARIOS */
+
+    actualizarHorarios();
+
+
+    resultado.innerHTML = `
+
+        <div class="correcto">
+
+            <strong>
+                ✓ Cita cancelada correctamente.
+            </strong>
+
+            <br><br>
+
+            La cita
+            <strong>${cita.id}</strong>
+            fue cancelada.
+
+            <br><br>
+
+            El horario
+            <strong>${cita.hora}</strong>
+            del día
+            <strong>
+                ${formatearFecha(cita.fecha)}
+            </strong>
+            quedó disponible nuevamente.
+
+        </div>
+
+    `;
+
+
+    /*
+        Mostrar botón para
+        generar una nueva cita.
+    */
+
+    document.getElementById(
+        "btnNuevaCita"
+    ).style.display =
+        "block";
+
+
+    /*
+        Limpiar número.
+    */
+
+    document.getElementById(
+        "numeroCancelar"
+    ).value = "";
+
+}
+
+
+/* =====================================================
+   GENERAR NUEVA CITA
+===================================================== */
+
+document
+    .getElementById("btnNuevaCita")
+    .addEventListener(
+        "click",
+        function() {
+
+            /*
+                Limpiar información
+                de la cita anterior.
+            */
+
+            especialidad.value = "";
+
+
+            medico.innerHTML = `
+
+                <option value="">
+
+                    Selecciona una especialidad
+
+                </option>
+
+            `;
+
+
+            fecha.value = "";
+
+            hora.value = "";
+
+            document.getElementById(
+                "motivo"
+            ).value = "";
+
+
+            horarios.innerHTML = `
+
+                <div class="info">
+
+                    Selecciona especialidad,
+                    médico y fecha para generar
+                    una nueva cita.
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "confirmacion"
+            ).style.display =
+                "none";
+
+
+            /*
+                Conservar la CURP
+                y los datos del paciente.
+            */
+
+
+            /*
+                Regresar al apartado
+                de generar cita.
+            */
+
+            document
+                .getElementById("formCita")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+    );
+
+
+/* =====================================================
+   FUNCIONES AUXILIARES
+===================================================== */
+
+function obtenerEspecialidad(
+    valor
+) {
+
+    const nombres = {
+
+        medicina_general:
+            "Medicina General",
+
+        cardiologia:
+            "Cardiología",
+
+        pediatria:
+            "Pediatría",
+
+        dermatologia:
+            "Dermatología",
+
+        ginecologia:
+            "Ginecología",
+
+        traumatologia:
+            "Traumatología",
+
+        odontologia:
+            "Odontología"
+
+    };
+
+
+    return nombres[valor] || valor;
+
+}
+
+
+function formatearFecha(
+    fechaTexto
+) {
+
+    const partes =
+        fechaTexto.split("-");
+
+    return (
+
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+
+    );
+
+}
+
+</script>
+
 </body>
 </html>
